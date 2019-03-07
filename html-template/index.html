@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+
+    <head>
+        <title>MPlayer</title>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script type="text/javascript">
+        function setWindowNum(num){
+            player.window.setWindowNum(num);
+        }
+        function playAll()
+        {
+            player.window.playAll();
+        }
+        function getVersion()
+        {
+            player.window.getVersion();
+        }
+        </script>
+    </head>
+    <body>
+        <input type="button" onclick="setWindowNum(1)" value="1"/>
+        <input type="button" onclick="setWindowNum(4)" value="4"/>  
+        <input type="button" onclick="setWindowNum(6)" value="6"/>  
+        <input type="button" onclick="setWindowNum(8)" value="8"/>  
+        <input type="button" onclick="setWindowNum(9)" value="9"/>  
+        <input type="button" onclick="setWindowNum(16)" value="16"/>  
+        <input type="button" onclick="setWindowNum(25)" value="25"/>  
+        <input type="button" onclick="setWindowNum(36)" value="36"/>
+        <input type="button" onclick="getVersion()" value="获取播放器版本号"/>
+        <input type="button" onclick="playAll()" value="startVod"/>
+    </br>
+        <iframe name="player" height="700px" width="1000px" src="TestMPlayer.html"></iframe>
+   </body>
+</html>

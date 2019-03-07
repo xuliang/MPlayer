@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="67e972b7-0345-40dc-aebc-630000331f7e" projectUUID="67e972b7-0345-40dc-aebc-630000331f7e" pureCatalystProject="false" sdkVersion="4.6.0" uuid="05db164c-2370-40f2-ac48-bf69287a5ccc" version="15">
+  <projects/>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="05db164c-2370-40f2-ac48-bf69287a5ccc"/>
+    <linked location="D:/Projects/Miracle/MPlayer/libs" path="/libs" position="1" uuid="05db164c-2370-40f2-ac48-bf69287a5ccc"/>
+  </swc>
+  <misc/>
+  <theme/>
+  <mxmlFormattingPrefs groupAttributesByState="true" maxLineWidth="100" mxmlAlignAttributes="true" mxmlAttributeOrder="id,userLabel,includeIn,excludeFrom,visible,x,y,z,left,right,top,bottom,width,height,minWidth,minHeight,maxWidth,maxHeight,label" mxmlKeepAttributeValuesOrganized="true"/>
+</fxpProperties>

@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+    <!-- 
+    Smart developers always View Source. 
+    
+    This application was built using Adobe Flex, an open source framework
+    for building rich Internet applications that get delivered via the
+    Flash Player or to desktops via Adobe AIR. 
+    
+    Learn more about Flex at http://flex.org 
+    // -->
+    <head>
+        <title></title>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
+             the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
+             the percentage of the height of its parent container, which has to be set explicitly.  Fix for
+             Firefox 3.6 focus border issues.  Initially, don't display flashContent div so it won't show 
+             if JavaScript disabled.
+        -->
+        <style type="text/css" media="screen"> 
+            html, body  { height:100%; }
+            body { margin:0; padding:0; overflow:auto; text-align:center; 
+                   background-color: #ffffff; }   
+            object:focus { outline:none; }
+            #flashContent { display:none; }
+        </style>
+        
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section -->
+        <link rel="stylesheet" type="text/css" href="history/history.css" />
+        <script type="text/javascript" src="history/history.js"></script>
+        <!-- END Browser History required section -->  
+            
+        <script type="text/javascript" src="swfobject.js"></script>
+        <script type="text/javascript">
+                function onloadcallback(e) {
+        //e.ref.setWindowNum(1);
+        //alert("e.success = " + e.success +"\ne.id = "+ e.id +"\ne.ref = "+ e.ref);
+        setWindowNum(1);
+        alert("........................");
+    	}
+        //function sayHi() {
+        	//setWindowNum(1);
+        	//alert("!!!!!!!!!!!!!!!!");
+    	//}
+    
+    
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "11.1.0";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "playerProductInstall.swf";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#ffffff";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "MPlayer";
+            attributes.name = "MPlayer";
+            attributes.align = "middle";
+            swfobject.embedSWF(
+                "MPlayer.swf", "flashContent", 
+                "100%", "100%", 
+                swfVersionStr, xiSwfUrlStr, 
+                flashvars, params, attributes);
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+            //swfobject.addDomLoadEvent(sayHi);
+        </script>
+             
+                <script type="text/javascript"> 
+            /**获取视频播放器swf,name无用*/
+    function getSWF(delName) {
+       // if (!swfLoaded) {
+       //     return null;
+       // }
+       var obj = document.getElementById("MPlayer");
+       //var obj = swfobject.getObjectById("HelloWorld");
+if (obj) {
+  return obj;
+}
+        //return document.getElementById("HelloWorld");
+    }
+    /**设置视频窗口显示个数 0成功 1失败 bs调用flash*/
+    function setWindowNum(iNum) {
+        //alert(iNum);
+        var obj = getSWF('MPlayer');
+        //alert(obj);
+        if (obj == null)
+        {
+            alert(obj);
+            return -1;
+        }
+            var str = obj.setWindowNum(iNum);
+        //alert(str);
+        return str;
+    }
+    function getVersion() {
+        var obj = getSWF('MPlayer');
+        var str = obj.getVersion();
+        alert(str);
+    }
+    function setServerInfo() {
+        var obj = getSWF('MPlayer');
+        var str = obj.setServerInfo("10.20.192.163","1935");
+        alert(str);
+    }
+    function setVideoServer() {
+        var obj = getSWF('MPlayer');
+        var str = obj.setVideoServer(1,"10.20.192.163","1935");
+        alert(str);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+    /*
+     * 停止预览视频
+     */
+    function stopVideo(window) {
+        swfobject.getObjectById('cmsv6flash').stopVideo(window.index);
+        window.isPreview = false;
+    };
+
+    function startVideoReplay(title, url) {
+	//var window = this.lstWindows[this.activeIndex];
+    var obj = getSWF('MPlayer');
+    obj.stopVideo(0);
+    obj.setVideoInfo(0, "bsbsbs");
+    obj.startVideo(0 ,"rtmp://10.20.192.163:1935/live/222");
+    //obj.startVideo(0 ,"http://10.20.192.163:8080/live/222.m3u8");
+
+	//初始化开始播放时间
+	//window.initViewTime();
+    }
+
+
+    /**
+* 预览视频
+* @param vehiIdno 车牌号
+* @param arrChn	通道列表
+* @param stream	码流
+* @param arrTitle	标题
+* @param viewCloseTime	自动关闭时间
+* @param armType 报警信息
+*/
+function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, armType,isVedio) {
+	var obj = getSWF('MPlayer');
+	
+    //	loadConsoleTime(true, 'ttxplayer-previewVideo');
+        //耗时 100ms+  400+ 500+
+    //	loadConsoleTime(true, 'ttxplayer-stopVideo');
+    obj.stopVideo(window);
+    //	loadConsoleTime(false, 'ttxplayer-stopVideo');
+        //耗时平均30-50ms  36画面 150ms内
+    //	loadConsoleTime(true, 'ttxplayer-setVideoInfo');
+    //    if(armType != null) {
+    //        swfobject.getObjectById('cmsv6flash').setVideoInfo(window.index, title + " - " + armType.name);
+    //    }else {
+        obj.setVideoInfo(window, title);
+    //    }
+    //	loadConsoleTime(false, 'ttxplayer-setVideoInfo');
+    //    var server = this.getVideoServer();
+        //耗时平均30-50ms  36画面 150ms内
+    //	loadConsoleTime(true, 'ttxplayer-setVideoServer');
+    //    obj.setServerInfo("10.20.192.163", "1935");
+    //    obj.setVideoServer(0, "10.20.192.163", "1935");
+
+    //	loadConsoleTime(false, 'ttxplayer-setVideoServer');
+        //启动预览
+        //window.setPreview(devIdno, channel, stream, server.port, viewCloseTime, title, armType);
+    //    obj.setVideoTbarBgColor(window,'333333');//设置工具条背景颜色，这个有效
+        var jsession = "jsession";
+        //耗时平均15-50ms  36画面 150ms内
+    //	loadConsoleTime(true, 'ttxplayer-startVideo');
+    obj.setBufferTime(window, 0.8);
+    //obj.setBufferTimeMax(0, 1.5);
+    //obj.startVod(0, jsession, devIdno, channel, 1, true);
+    obj.startVideo(window, devIdno, "live", "222", 1, true,"10.20.192.163", "1935");
+    //	loadConsoleTime(false, 'ttxplayer-startVideo');
+    //    if(isVedio){
+    //    obj.setToolBarVisible(0, 4, true);
+    //    }
+        
+        //开启视频关闭计时器
+        //if(this.closeVideoTimer == null) {
+        //    this.closeVideoWindowTimer();
+        //}
+    
+        //开启流量超标监控
+        //if(this.closeFlowLimitTimer == null){
+        //    this.overFlowLimitTimer();
+        //}
+    
+    //	loadConsoleTime(false, 'ttxplayer-previewVideo');
+    };
+    function playAll()
+    {
+        previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
+        previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
+        previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
+        previewVideo(3,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMywxLDAsMA==",1,1,"通道04",1,1);
+        previewVideo(4,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNCwxLDAsMA==",1,1,"通道05",1,1);
+        previewVideo(5,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNSwxLDAsMA==",1,1,"通道06",1,1);
+
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        </script> 
+
+   
+    </head>
+    <body>
+        <!-- <input type="button" onclick="setWindowNum(1)" value="1"/>
+        <input type="button" onclick="setWindowNum(4)" value="4"/>  
+        <input type="button" onclick="setWindowNum(6)" value="6"/>  
+        <input type="button" onclick="setWindowNum(8)" value="8"/>  
+        <input type="button" onclick="setWindowNum(9)" value="9"/>  
+        <input type="button" onclick="setWindowNum(16)" value="16"/>  
+        <input type="button" onclick="setWindowNum(25)" value="25"/>  
+        <input type="button" onclick="setWindowNum(36)" value="36"/>
+        <input type="button" onclick="getVersion()" value="获取播放器版本号"/>
+        <input type="button" onclick="setServerInfo()" value="设置服务器信息"/>
+        <input type="button" onclick="setVideoServer()" value="设置video服务器信息"/>
+        <input type="button" onclick="startVideoReplay()" value="startVideo"/>
+        <input type="button" onclick="playAll()" value="startVod"/> -->
+        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+             JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+             when JavaScript is disabled.
+        -->
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                11.1.0 or greater is installed. 
+            </p>
+            <script type="text/javascript"> 
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+            </script> 
+        </div>
+        
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="MPlayer">
+                <param name="movie" value="MPlayer.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="MPlayer.swf" width="100%" height="100%">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>
+        </body>
+</html>
