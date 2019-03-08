@@ -47,7 +47,7 @@ package com.hlet.RTMP
         {
             this.state = 1;
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "reciveNetError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "reciveNetError");
             return;
         }
 
@@ -58,12 +58,12 @@ package com.hlet.RTMP
             {
                 case "NetConnection.Connect.Success":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "startRecive");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "startRecive");
                     break;
                 }
                 case "NetConnection.Connect.Closed":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "reciveNetError");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "reciveNetError");
                     break;
                 }
             }
@@ -74,7 +74,7 @@ package com.hlet.RTMP
         {
             this.state = 1;
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "reciveError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "reciveError");
             return;
         }
 
@@ -82,14 +82,14 @@ package com.hlet.RTMP
         {
             this.state = 1;
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "reciveError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "reciveError");
             return;
         }
 
         function asyncErrorHandler(arg1:flash.events.AsyncErrorEvent):void
         {
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "reciveError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "reciveError");
             return;
         }
 
@@ -101,26 +101,26 @@ package com.hlet.RTMP
             {
                 case "NetStream.Buffer.Empty":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "loadRecive");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "loadRecive");
                     this.state = 1;
                     break;
                 }
                 case "NetStream.Buffer.Full":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "playRecive");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "playRecive");
                     this.state = 0;
                     break;
                 }
                 case "NetStream.Play.Failed":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "reciveFaild");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "reciveFaild");
                     this.Play();
                     this.state = 1;
                     break;
                 }
                 case "NetStream.Play.StreamNotFound":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "reciveStreamNotFound");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "reciveStreamNotFound");
                     this.state = 1;
                     break;
                 }
@@ -128,12 +128,12 @@ package com.hlet.RTMP
                 {
                     this.Play();
                     this.state = 1;
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "reciveStreamStop");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "reciveStreamStop");
                     break;
                 }
                 case "NetConnection.Connect.Closed":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "reciveNetError");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "reciveNetError");
                     break;
                 }
             }

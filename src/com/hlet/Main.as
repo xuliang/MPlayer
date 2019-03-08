@@ -681,7 +681,7 @@ package com.hlet
 				}
 				++loc4;
 			}
-			flash.external.ExternalInterface.call("onTtxVideoBeforePopMenu", "" + loc3 + "");
+			flash.external.ExternalInterface.call("onVideoBeforePopMenu", "" + loc3 + "");
 			var loc5:*=null;
 			if (loc3 != -1) 
 			{
@@ -770,7 +770,7 @@ package com.hlet
 		public function stopListen():*
 		{
 			RtmpManager.stopListen();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "stopListen");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "stopListen");
 			return;
 		}
 		
@@ -1075,7 +1075,7 @@ package com.hlet
 					}
 					++loc2;
 				}
-				flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "WindowFull");
+				flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "WindowFull");
 			}
 			else 
 			{
@@ -1089,7 +1089,7 @@ package com.hlet
 					}
 					++loc2;
 				}
-				flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "WindowNorm");
+				flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "WindowNorm");
 			}
 			RectManager.stage = stage;
 			RectManager.reSizeVideo();
@@ -1151,7 +1151,7 @@ package com.hlet
 				this.vod[arg1.currentTarget.id].isfull = false;
 				this.vod[arg1.currentTarget.id].reSize();
 				this.vod[arg1.currentTarget.id].showBorder();
-				flash.external.ExternalInterface.call("onTtxVideoMsg", "" + arg1.currentTarget.id + "", "norm");
+				flash.external.ExternalInterface.call("onVideoMsg", "" + arg1.currentTarget.id + "", "norm");
 			}
 			else 
 			{
@@ -1172,7 +1172,7 @@ package com.hlet
 					}
 					++loc2;
 				}
-				flash.external.ExternalInterface.call("onTtxVideoMsg", "" + arg1.currentTarget.id + "", "full");
+				flash.external.ExternalInterface.call("onVideoMsg", "" + arg1.currentTarget.id + "", "full");
 			}
 			this.currVod = this.vod[arg1.currentTarget.id];
 			//this.tools.setVod(this.currVod);
@@ -1181,7 +1181,7 @@ package com.hlet
 		
 		function onFull(arg1:PlayEvent):void
 		{
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + arg1.currentTarget.id + "", "WindowFull");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + arg1.currentTarget.id + "", "WindowFull");
 			stage.displayState = flash.display.StageDisplayState.FULL_SCREEN;
 			var loc1:*=0;
 			while (loc1 < this.vod.length) 
@@ -1197,7 +1197,7 @@ package com.hlet
 		
 		function onNorm(arg1:PlayEvent):void
 		{
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + arg1.currentTarget.id + "", "WindowNorm");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + arg1.currentTarget.id + "", "WindowNorm");
 			stage.displayState = flash.display.StageDisplayState.NORMAL;
 			var loc1:*=0;
 			while (loc1 < this.vod.length) 
@@ -1239,7 +1239,7 @@ package com.hlet
 				this.currVod.ablevol();
 			}
 			//this.tools.setVod(this.currVod);
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + arg1 + "", "select");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + arg1 + "", "select");
 			return;
 		}
 		

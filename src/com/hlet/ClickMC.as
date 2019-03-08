@@ -1,21 +1,29 @@
 package com.hlet
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	
+	import mx.core.BitmapAsset;
+	
 	public class ClickMC extends flash.display.Sprite
 	{
-		public var mc:flash.display.MovieClip=new MovieClip();		
+		//public var mc:flash.display.MovieClip=new MovieClip();	
+		var mc:Bitmap = new Bitmap();
 		var Rect:*;		
 		public var isFull:*=false;
 		
-		[Embed(source="../images/sprite76.swf")]  
+		[Embed(source="../images/msk.jpg")]  
 		[Bindable]    
 		private var bg:Class;
 		public function ClickMC()
 		{
 			super();
-			mc = new bg();
+			var data:BitmapData = BitmapAsset(new bg()).bitmapData;
+			mc.bitmapData = data;
+			this.mc.alpha = 0;
+			//mc = new bg();
 			addChild(mc);
 			return;
 		}

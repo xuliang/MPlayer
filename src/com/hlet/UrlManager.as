@@ -43,7 +43,7 @@ package com.hlet
 			this.retry = true;
 			this.tim1 = flash.utils.setTimeout(this.timeout, 10000);
 			this.urlParm = urlParm;
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "beginGetServerInfo");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "beginGetServerInfo");
 			url = "http://" + urlParm.ServerIp + ":" + urlParm.ServerPort + "/3/1?MediaType=1&AVType=" + urlParm.AvType + "&DevIDNO=" + urlParm.DevIdno + "&Channel=" + urlParm.Channel + "&Type=" + Type;
 			flash.external.ExternalInterface.call("onDebug", "getURLAPI==" + url);
 			req = new flash.net.URLRequest(url);
@@ -68,7 +68,7 @@ package com.hlet
 			
 			var loc1:*;
 			this.tim1 = flash.utils.setTimeout(this.timeout, 10000);
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "retryGetServerInfo");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "retryGetServerInfo");
 			url = "http://" + this.urlParm.ServerIp + ":" + this.urlParm.ServerPort + "/3/1?MediaType=1&AVType=" + this.urlParm.AvType + "&DevIDNO=" + this.urlParm.DevIdno + "&Channel=" + this.urlParm.Channel + "&Type=0";
 			trace("getURLAPI   " + url);
 			req = new flash.net.URLRequest(url);
@@ -101,7 +101,7 @@ package com.hlet
 			var loc2:*=com.adobe.serialization.json.JSON.decode(loc1);
 			if (loc2.result != 0) 
 			{
-				flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "getServerInfoError");
+				flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "getServerInfoError");
 				if (this.retry) 
 				{
 					this.tim = flash.utils.setTimeout(this.getUrl1, 5000);
@@ -204,7 +204,7 @@ package com.hlet
 			loc14.ServerId = loc3;
 			loc14.um = this.urlParm;
 			this.dispatchEvent(loc14);
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "getServerInfo ip=" + loc5 + "&port=" + loc11);
+			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "getServerInfo ip=" + loc5 + "&port=" + loc11);
 			return;
 		}
 		

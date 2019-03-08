@@ -151,7 +151,7 @@ package com.hlet
 			this.ldinfo.visible = false;
 			this.msg.showMsg("connectError");
 			this.Play();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "neterror");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "neterror");
 			return;
 		}
 		
@@ -161,7 +161,7 @@ package com.hlet
 			this.ldinfo.visible = false;
 			this.msg.showMsg("connectError");
 			this.Play();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "neterror");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "neterror");
 			return;
 		}
 		
@@ -228,7 +228,7 @@ package com.hlet
 			this.ldinfo.visible = false;
 			this.msg.showMsg("connectError");
 			this.Play();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "videoerror");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "videoerror");
 			return;
 		}
 		
@@ -238,7 +238,7 @@ package com.hlet
 			this.ldinfo.visible = false;
 			this.msg.showMsg("connectError");
 			this.Play();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "videoerror");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "videoerror");
 			return;
 		}
 		
@@ -400,7 +400,7 @@ package com.hlet
 			this.videoStream.soundTransform = loc1;
 			this.isvol = false;
 			this.CtrlPan.btnSound.silent();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "silent");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "silent");
 			return;
 		}
 		
@@ -414,7 +414,7 @@ package com.hlet
 			this.videoStream.soundTransform = loc1;
 			this.isvol = true;
 			this.CtrlPan.btnSound.sound();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "sound");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "sound");
 			return;
 		}
 		
@@ -430,7 +430,7 @@ package com.hlet
 				this.ispaus = true;
 			}
 			this.playbtn.visible = true;
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "paus");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "paus");
 			return;
 		}
 		
@@ -452,7 +452,7 @@ package com.hlet
 			}
 			this.dbClickMC.Hide();
 			this.playbtn.visible = false;
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "play");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "play");
 			return;
 		}
 		
@@ -492,7 +492,7 @@ package com.hlet
 			this.CtrlPan.btnPlay.enable();
 			this.CtrlPan.btnCap.disable();
 			//this.CtrlPan.btncamer.disable();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "stop");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "stop");
 			return;
 		}
 		
@@ -649,10 +649,12 @@ package com.hlet
 			var m:Matrix;
 			var e:* = com.hlet.event.PlayEvent;
 			dispatchEvent(new com.hlet.event.PlayEvent("norm"));
-			//var bmpd:* = new BitmapData(320, 240);
+			
 			try
 			{
-				var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
+				var bmpd:* = new BitmapData(320, 240);
+				//var bmpd:* = new BitmapData(704, 576);
+				//var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
 				m = new Matrix();
 				//m.tx = this.video.x;
 				//m.ty = this.video.y;
@@ -661,12 +663,12 @@ package com.hlet
 			}
 			catch (e:Error)
 			{
-				ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "PicSave-error" + e.message);
+				ExternalInterface.call("onVideoMsg", "" + 0 + "", "PicSave-error" + e.message);
 				return;
 			}
 			var imgByteArray:* = PNGEncoder.encode(bmpd);
 			var FileRefe:* = new FileReference();
-			ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "PicSave");
+			ExternalInterface.call("onVideoMsg", "" + 0 + "", "PicSave");
 			var date:* = new Date();
 			var info:*;
 			if (this.CtrlPan.info != "")
@@ -810,7 +812,7 @@ package com.hlet
 			this.timer.start();
 			this.CtrlPan.btnPlay.onPlay();
 			this.CtrlPan.enable();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "start");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "start");
 			this.playbtn.visible = false;
 			this.dbClickMC.Hide();
 			return;
@@ -880,7 +882,7 @@ package com.hlet
 			this.playbtn.reSize();
 			this.dbClickMC.isFull = true;
 			this.dbClickMC.reSize();
-			flash.external.ExternalInterface.call("onTtxVideoMsg", "" + this.id + "", "full");
+			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "full");
 			return;
 		}
 	}

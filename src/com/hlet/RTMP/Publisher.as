@@ -31,7 +31,7 @@ package com.hlet.RTMP
         {
             this.state = 1;
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "uploadError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "uploadError");
             return;
         }
 
@@ -42,12 +42,12 @@ package com.hlet.RTMP
             {
                 case "NetConnection.Connect.Success":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadRecive");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadRecive");
                     break;
                 }
                 case "NetConnection.Connect.Closed":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadNetError");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadNetError");
                     break;
                 }
             }
@@ -68,19 +68,19 @@ package com.hlet.RTMP
                 }
                 case "NetStream.Buffer.Empty":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "upload");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "upload");
                     this.state = 0;
                     break;
                 }
                 case "NetStream.Buffer.Full":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadfull");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadfull");
                     this.state = 1;
                     break;
                 }
                 case "NetStream.Play.Failed":
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadFaild");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadFaild");
                     this.Play();
                     this.state = 1;
                     break;
@@ -89,7 +89,7 @@ package com.hlet.RTMP
                 {
                     this.Play();
                     this.state = 1;
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadFaild");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadFaild");
                     break;
                 }
                 case "NetConnection.Connect.Closed":
@@ -97,13 +97,13 @@ package com.hlet.RTMP
                 {
                     this.Play();
                     this.state = 1;
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadNetClosed");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadNetClosed");
                     break;
                 }
                 case "NetStream.Play.StreamNotFound":
                 {
                     RtmpManager.stopTalkback();
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "uploadBusy");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "uploadBusy");
                     break;
                 }
             }
@@ -232,7 +232,7 @@ package com.hlet.RTMP
                 }
                 if (this._mic.muted) 
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "micDenied");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "micDenied");
                     this.Stop();
                     return 2;
                 }
@@ -259,7 +259,7 @@ package com.hlet.RTMP
                 if (arg1.code == "Microphone.Muted") 
                 {
                     RtmpManager.stopTalkback();
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "micDenied");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "micDenied");
                 }
             }
             return;
@@ -293,7 +293,7 @@ package com.hlet.RTMP
             {
                 if (this._mic == null) 
                 {
-                    flash.external.ExternalInterface.call("onTtxVideoMsg", "" + 0 + "", "noMIC");
+                    flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "noMIC");
                     RtmpManager.stopTalkback();
                 }
                 else 
@@ -342,14 +342,14 @@ package com.hlet.RTMP
         {
             this.state = 1;
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "uploadNetError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "uploadNetError");
             return;
         }
 
         function asyncErrorHandler(arg1:flash.events.AsyncErrorEvent):void
         {
             this.Play();
-            flash.external.ExternalInterface.call("onTtxVideoMsg", "0", "uploadError");
+            flash.external.ExternalInterface.call("onVideoMsg", "0", "uploadError");
             return;
         }
 

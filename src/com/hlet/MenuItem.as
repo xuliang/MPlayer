@@ -24,7 +24,7 @@ package com.hlet
 		function onMenu(arg1:flash.events.ContextMenuEvent):*
 		{
 			trace("index " + this.id + " menuid" + this.menuId);
-			flash.external.ExternalInterface.call("onTtxVideoRightMenu", "" + this.id + "", this.menuId);
+			flash.external.ExternalInterface.call("onVideoRightMenu", "" + this.id + "", this.menuId);
 			return;
 		}
 		
