@@ -654,9 +654,10 @@ package com.hlet
 			try
 			{
 				//固定了截图尺寸，不知道为什么无法根据this.video.videoWidth, this.video.videoHeight截图
+				var bmpd:* = new BitmapData(320, 240);
 				//var bmpd:* = new BitmapData(352, 288);
 				//var bmpd:* = new BitmapData(704, 576);
-				var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
+				//var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
 				m = new Matrix();
 				//m.tx = this.video.x;
 				//m.ty = this.video.y;
