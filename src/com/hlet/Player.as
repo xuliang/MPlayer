@@ -1,11 +1,9 @@
 package com.hlet
 {
-//	import com.adobe.images.*;
 	import com.adobe.images.PNGEncoder;
 	import com.hlet.btn.VideoButton;
 	import com.hlet.event.PlayEvent;
 	import com.hlet.event.PlayerEvent;
-	
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.events.AsyncErrorEvent;
@@ -23,9 +21,7 @@ package com.hlet
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 	import flash.system.Security;
-	import flash.utils.ByteArray;
 	import flash.utils.Timer;
-	
 	
 	public class Player extends flash.display.MovieClip
 	{		
@@ -652,7 +648,8 @@ package com.hlet
 			
 			try
 			{
-				var bmpd:* = new BitmapData(320, 240);
+				//固定了截图尺寸，不知道为什么无法根据this.video.videoWidth, this.video.videoHeight截图
+				var bmpd:* = new BitmapData(352, 288);
 				//var bmpd:* = new BitmapData(704, 576);
 				//var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
 				m = new Matrix();
@@ -779,14 +776,14 @@ package com.hlet
 			return;
 		}
 		
-		function fclick(arg1:flash.events.MouseEvent):void
+		private function fclick(arg1:flash.events.MouseEvent):void
 		{
 			trace("fclick");
 			if (this.isfull) 
 			{
 				return;
 			}
-			trace("click player");
+			//trace("click player");
 			dispatchEvent(new PlayerEvent("pclick"));
 			return;
 		}

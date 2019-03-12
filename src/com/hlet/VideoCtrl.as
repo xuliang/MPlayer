@@ -81,7 +81,7 @@ package com.hlet
 		public function reSet():*
 		{
 			this.info = "";
-			this.infoBar.BackGround.setColor("0x000000");
+			this.infoBar.BackGround.setColor("0xFF0000");
 			return;
 		}
 		
@@ -134,7 +134,7 @@ package com.hlet
 				this.infoBar.BackGround.width = this.Rect.sw;
 //				this.y = 400 + (this.Rect.sh - 400) / 2 - 25;
 //				this.x = (-(this.Rect.sw - 550)) / 2;
-				this.y =this.Rect.sh-25;
+				this.y =this.Rect.sh-30;
 				this.x = 0;
 				loc2 = 0;
 				while (loc2 < this.btns.length) 

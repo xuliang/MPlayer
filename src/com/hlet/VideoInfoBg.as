@@ -8,7 +8,7 @@ package com.hlet
 		{
 			super();
 			this.graphics.beginFill(this.color, this.alp);
-			this.graphics.drawRect(0, 0, 200, 25);
+			this.graphics.drawRect(0, 0, 200, 30);
 			this.graphics.endFill();
 			return;
 		}
@@ -18,7 +18,7 @@ package com.hlet
 			this.color = "0x" + arg1;
 			this.graphics.clear();
 			this.graphics.beginFill(this.color, arg2);
-			this.graphics.drawRect(0, 0, 200, 25);
+			this.graphics.drawRect(0, 0, 200, 30);
 			this.graphics.endFill();
 			return;
 		}

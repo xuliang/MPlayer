@@ -982,7 +982,7 @@ package com.hlet
 					this.vod[loc1].addEventListener(PlayEvent.NORM, this.onNorm);
 				}
 				this.vod[loc1].setRect(this.rect[loc1]);
-				this.vod[loc1].setNorm();
+				//this.vod[loc1].setNorm();
 				this.vod[loc1].id = loc1;
 				//this.vod[loc1].disvol();
 				this.vod[loc1].visible = true;

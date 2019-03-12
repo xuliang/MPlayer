@@ -15,7 +15,7 @@ package com.hlet.btn
 		[Bindable]    
 		private var dis:Class;
 		
-		[Embed(source="../images/talk2.png")]  
+		[Embed(source="../images/talk2.png")]
 		[Bindable]
 		private var over:Class;
 		private var img:Bitmap = new Bitmap();
