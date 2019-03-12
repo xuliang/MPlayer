@@ -180,6 +180,7 @@ package com.hlet
 		
 		function nstat(arg1:flash.events.NetStatusEvent):void
 		{
+			//trace("nstat-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
 			trace("playVideo " + arg1.info.code);
 			if (this.iswait) 
 			{
@@ -253,6 +254,8 @@ package com.hlet
 		
 		function onMetaData(arg1:Object):void
 		{
+			video.width = video.videoWidth; 
+			video.height = video.videoHeight; 
 			this._duration = arg1.duration;
 			dispatchEvent(new PlayerEvent("alltime"));
 			return;
@@ -644,14 +647,16 @@ package com.hlet
 		{
 			var m:Matrix;
 			var e:* = com.hlet.event.PlayEvent;
-			dispatchEvent(new com.hlet.event.PlayEvent("norm"));
-			
+			//dispatchEvent(new com.hlet.event.PlayEvent("norm"));
+//			video.width = video.videoWidth; 
+//			video.height = video.videoHeight; 
+			trace("onCapture-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
 			try
 			{
 				//固定了截图尺寸，不知道为什么无法根据this.video.videoWidth, this.video.videoHeight截图
-				var bmpd:* = new BitmapData(352, 288);
+				//var bmpd:* = new BitmapData(352, 288);
 				//var bmpd:* = new BitmapData(704, 576);
-				//var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
+				var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
 				m = new Matrix();
 				//m.tx = this.video.x;
 				//m.ty = this.video.y;
@@ -804,7 +809,9 @@ package com.hlet
 			this.vodBorder.updateBG();
 			this.msg.visible = false;
 			this.video.clear();
+			//trace("Width:"+this.video.width+"Height:"+this.video.height+"Video Width:"+this.video.videoWidth+"Video Height:"+this.video.videoHeight);
 			this.videoStream.play(this.flvurl);
+			
 			this.addEventListener(flash.events.Event.ENTER_FRAME, this.refreshBuffer);
 			this.timer.start();
 			this.CtrlPan.btnPlay.onPlay();
