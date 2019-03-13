@@ -647,22 +647,22 @@ package com.hlet
 		{
 			var m:Matrix;
 			var e:* = com.hlet.event.PlayEvent;
-			//dispatchEvent(new com.hlet.event.PlayEvent("norm"));
+			dispatchEvent(new com.hlet.event.PlayEvent("norm"));
 //			video.width = video.videoWidth; 
 //			video.height = video.videoHeight; 
 			trace("onCapture-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
 			try
 			{
 				//固定了截图尺寸，不知道为什么无法根据this.video.videoWidth, this.video.videoHeight截图
-				var bmpd:* = new BitmapData(320, 240);
+				//var bmpd:* = new BitmapData(320, 240);
 				//var bmpd:* = new BitmapData(352, 288);
 				//var bmpd:* = new BitmapData(704, 576);
-				//var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
-				m = new Matrix();
+				var bmpd = new flash.display.BitmapData(this.video.videoWidth, this.video.videoHeight);
+				m = new Matrix(this.video.videoWidth/320,0,0,this.video.videoHeight/240);
 				//m.tx = this.video.x;
 				//m.ty = this.video.y;
 			
-				bmpd.draw(this.video,m);
+				bmpd.draw(this.video,m,null,null,null,true);
 			}
 			catch (e:Error)
 			{
