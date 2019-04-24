@@ -245,14 +245,57 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     };
     function playAll()
     {
-        previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
-        previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
-        previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
-        previewVideo(3,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMywxLDAsMA==",1,1,"通道04",1,1);
-        previewVideo(4,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNCwxLDAsMA==",1,1,"通道05",1,1);
-        previewVideo(5,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNSwxLDAsMA==",1,1,"通道06",1,1);
+    	previewVideo(0,"http://58.217.99.135:28080/123/111.flv",1,1,"通道01",1,1);
+    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
+    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
+    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
+    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
+    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000001_1.flv",1,1,"通道06",1,1);
+        //previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
+        //previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
+        //previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
+        //previewVideo(3,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMywxLDAsMA==",1,1,"通道04",1,1);
+        //previewVideo(4,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNCwxLDAsMA==",1,1,"通道05",1,1);
+        //previewVideo(5,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNSwxLDAsMA==",1,1,"通道06",1,1);
 
     }
+    function play(num)
+    {
+    	switch(num)
+    	{
+    	case 1:
+    	{
+    	previewVideo(0,"http://58.217.99.135:28080/123/111.flv",1,1,"通道01",1,1);
+    	break;
+    	}
+    	    	case 2:
+    	{
+    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
+    	break;
+    	}
+    	    	case 3:
+    	{
+    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
+    	break;
+    	}
+    	    	    	case 4:
+    	{
+    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
+    	break;
+    	}
+    	    	    	case 5:
+    	{
+    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
+    	break;
+    	}
+    	    	    	case 6:
+    	{
+    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000002_1.flv",1,1,"通道06",1,1);
+    	break;
+    	}
+    	}
+    }
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </script> 
 
@@ -269,6 +312,11 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
         <input type="button" onclick="setVideoServer()" value="设置video服务器信息"/>
         <input type="button" onclick="startVideoReplay()" value="startVideo"/>
         <input type="button" onclick="playAll()" value="startVod"/>
-
+<input type="button" onclick="play(1)" value="通道1"/>
+<input type="button" onclick="play(2)" value="通道2"/>
+<input type="button" onclick="play(3)" value="通道3"/>
+<input type="button" onclick="play(4)" value="通道4"/>
+<input type="button" onclick="play(5)" value="通道5"/>
+<input type="button" onclick="play(6)" value="通道6"/>
    </body>
 </html>

@@ -254,8 +254,8 @@ package com.hlet
 		
 		function onMetaData(arg1:Object):void
 		{
-			video.width = video.videoWidth; 
-			video.height = video.videoHeight; 
+			//video.width = video.videoWidth; 
+			//video.height = video.videoHeight; 
 			this._duration = arg1.duration;
 			dispatchEvent(new PlayerEvent("alltime"));
 			return;
@@ -799,7 +799,8 @@ package com.hlet
 			this.flvurl = arg1;
 			trace("playVideo " + arg1);
 			this._duration = 0;
-			var loc1:*=this.flvurl.substr(0, this.flvurl.lastIndexOf("/")) + "/crossdomain.xml";
+			//跨域文件写死了。。。。。。
+			var loc1:*="http://"+this.serverIP+":"+this.serverPort+"/crossdomain.xml";//this.flvurl.substr(0, this.flvurl.lastIndexOf("/")) + "/crossdomain.xml";
 			flash.system.Security.loadPolicyFile(loc1);
 			this.iswait = false;
 			this.ispaus = false;

@@ -19,6 +19,10 @@
         {
             player.window.getVersion();
         }
+function play(num)
+{
+player.window.play(num);
+}
         </script>
     </head>
     <body>
@@ -32,6 +36,12 @@
         <input type="button" onclick="setWindowNum(36)" value="36"/>
         <input type="button" onclick="getVersion()" value="获取播放器版本号"/>
         <input type="button" onclick="playAll()" value="startVod"/>
+        <input type="button" onclick="play(1)" value="通道1"/>
+<input type="button" onclick="play(2)" value="通道2"/>
+<input type="button" onclick="play(3)" value="通道3"/>
+<input type="button" onclick="play(4)" value="通道4"/>
+<input type="button" onclick="play(5)" value="通道5"/>
+<input type="button" onclick="play(6)" value="通道6"/>
     </br>
         <iframe name="player" height="700px" width="1000px" src="TestMPlayer.html"></iframe>
    </body>

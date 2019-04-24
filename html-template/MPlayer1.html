@@ -21,7 +21,7 @@
              if JavaScript disabled.
         -->
         <style type="text/css" media="screen"> 
-            html, body  { height:100%; }
+            html, body  { height:98%; }
             body { margin:0; padding:0; overflow:auto; text-align:center; 
                    background-color: #ffffff; }   
             object:focus { outline:none; }
@@ -71,7 +71,52 @@
             swfobject.createCSS("#flashContent", "display:block;text-align:left;");
             //swfobject.addDomLoadEvent(sayHi);
         </script>
-             
+    </head>
+    <body>
+        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+             JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+             when JavaScript is disabled.
+        -->
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                11.1.0 or greater is installed. 
+            </p>
+            <script type="text/javascript"> 
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+            </script> 
+        </div>
+        
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="MPlayer">
+                <param name="movie" value="MPlayer.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="MPlayer.swf" width="100%" height="100%">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>     
                 <script type="text/javascript"> 
             /**获取视频播放器swf,name无用*/
     function getSWF(delName) {
@@ -173,7 +218,7 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     //	loadConsoleTime(false, 'ttxplayer-setVideoServer');
         //启动预览
         //window.setPreview(devIdno, channel, stream, server.port, viewCloseTime, title, armType);
-    //    obj.setVideoTbarBgColor(window,'333333');//设置工具条背景颜色，这个有效
+    //    obj.setVideoTbarBgColor(window,'FF0000');//设置工具条背景颜色，这个有效
         var jsession = "jsession";
         //耗时平均15-50ms  36画面 150ms内
     //	loadConsoleTime(true, 'ttxplayer-startVideo');
@@ -200,21 +245,15 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     };
     function playAll()
     {
-    	previewVideo(0,"http://58.217.99.135:28080/123/111.flv",1,1,"通道01",1,1);
-    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
-    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
-    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
-    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
-    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000001_1.flv",1,1,"通道06",1,1);
-        //previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
-        //previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
-        //previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
-        //previewVideo(3,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMywxLDAsMA==",1,1,"通道04",1,1);
-        //previewVideo(4,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNCwxLDAsMA==",1,1,"通道05",1,1);
-        //previewVideo(5,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNSwxLDAsMA==",1,1,"通道06",1,1);
+        previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
+        previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
+        previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
+        previewVideo(3,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMywxLDAsMA==",1,1,"通道04",1,1);
+        previewVideo(4,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNCwxLDAsMA==",1,1,"通道05",1,1);
+        previewVideo(5,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsNSwxLDAsMA==",1,1,"通道06",1,1);
 
     }
-                function play(num)
+    function play(num)
     {
     	switch(num)
     	{
@@ -250,13 +289,11 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     	}
     	}
     }
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </script> 
 
-   
-    </head>
-    <body>
-        <!-- <input type="button" onclick="setWindowNum(1)" value="1"/>
+        <input type="button" onclick="setWindowNum(1)" value="1"/>
         <input type="button" onclick="setWindowNum(4)" value="4"/>  
         <input type="button" onclick="setWindowNum(6)" value="6"/>  
         <input type="button" onclick="setWindowNum(8)" value="8"/>  
@@ -268,50 +305,12 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
         <input type="button" onclick="setServerInfo()" value="设置服务器信息"/>
         <input type="button" onclick="setVideoServer()" value="设置video服务器信息"/>
         <input type="button" onclick="startVideoReplay()" value="startVideo"/>
-        <input type="button" onclick="playAll()" value="startVod"/> -->
-        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
-             JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
-             when JavaScript is disabled.
-        -->
-        <div id="flashContent">
-            <p>
-                To view this page ensure that Adobe Flash Player version 
-                11.1.0 or greater is installed. 
-            </p>
-            <script type="text/javascript"> 
-                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
-                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
-                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
-            </script> 
-        </div>
-        
-        <noscript>
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="MPlayer">
-                <param name="movie" value="MPlayer.swf" />
-                <param name="quality" value="high" />
-                <param name="bgcolor" value="#ffffff" />
-                <param name="allowScriptAccess" value="sameDomain" />
-                <param name="allowFullScreen" value="true" />
-                <!--[if !IE]>-->
-                <object type="application/x-shockwave-flash" data="MPlayer.swf" width="100%" height="100%">
-                    <param name="quality" value="high" />
-                    <param name="bgcolor" value="#ffffff" />
-                    <param name="allowScriptAccess" value="sameDomain" />
-                    <param name="allowFullScreen" value="true" />
-                <!--<![endif]-->
-                <!--[if gte IE 6]>-->
-                    <p> 
-                        Either scripts and active content are not permitted to run or Adobe Flash Player version
-                        11.1.0 or greater is not installed.
-                    </p>
-                <!--<![endif]-->
-                    <a href="http://www.adobe.com/go/getflashplayer">
-                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
-                    </a>
-                <!--[if !IE]>-->
-                </object>
-                <!--<![endif]-->
-            </object>
-        </noscript>
-        </body>
+        <input type="button" onclick="playAll()" value="startVod"/>
+<input type="button" onclick="play(1)" value="通道1"/>
+<input type="button" onclick="play(2)" value="通道2"/>
+<input type="button" onclick="play(3)" value="通道3"/>
+<input type="button" onclick="play(4)" value="通道4"/>
+<input type="button" onclick="play(5)" value="通道5"/>
+<input type="button" onclick="play(6)" value="通道6"/>
+   </body>
 </html>
