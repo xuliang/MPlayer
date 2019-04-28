@@ -800,7 +800,8 @@ package com.hlet
 			trace("playVideo " + arg1);
 			this._duration = 0;
 			
-			var loc1:*="http://"+this.serverIP+":"+this.serverPort+"/crossdomain.xml";//this.flvurl.substr(0, this.flvurl.lastIndexOf("/")) + "/crossdomain.xml";
+			//var loc1:*="http://58.217.99.135:28080/crossdomain.xml";//
+			var loc1:*=this.flvurl.substr(0, flvurl.indexOf("/",flvurl.indexOf("//")+2)) + "/crossdomain.xml";
 			flash.system.Security.loadPolicyFile(loc1);
 			this.iswait = false;
 			this.ispaus = false;

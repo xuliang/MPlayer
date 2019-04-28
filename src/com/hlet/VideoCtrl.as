@@ -23,7 +23,7 @@ package com.hlet
 		public var Rect:RECT;		
 		public var isFull:*=false;		
 		var btns:Array;
-		var infoTxt:TextField = new TextField();
+		//var infoTxt:TextField = new TextField();
 		public function VideoCtrl()
 		{
 			this.btns = new Array();
@@ -41,7 +41,8 @@ package com.hlet
 			addChild(btnPlay);
 			addChild(btnSound);
 			addChild(btnFull);
-
+			
+			
 			this.btnPlay.addEventListener(PlayEvent.PLAY, this.dispatch);
 			this.btnPlay.addEventListener(PlayEvent.PAUS, this.dispatch);
 			this.btnPlay.addEventListener(PlayEvent.STOP, this.dispatch);
@@ -164,7 +165,7 @@ package com.hlet
 				}
 			}
 			
-			this.infoBar.infoTxt.width = this.infoBar.BackGround.width - 100;
+			this.infoBar.infoTxt.width = this.infoBar.BackGround.width - 120;
 			if (this.infoBar.infoTxt.width < 60) 
 			{
 				this.infoBar.infoTxt.visible = false;

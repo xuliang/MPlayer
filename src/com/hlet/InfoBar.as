@@ -9,10 +9,17 @@ package com.hlet
 		var BackGround:VideoInfoBg = new VideoInfoBg();
 		public function InfoBar()
 		{
+			//this.height=100;
 			//this.y = 5;
-			//infoTxt.height = 40;
+			
 			addChild(BackGround);
+			//infoTxt.alwaysShowSelection=false;
+			//infoTxt.focusRect=false;
+			//infoTxt.mouseEnabled=false;
+			//infoTxt.border=true;
+			infoTxt.selectable=false;
 			infoTxt.y=5;
+			infoTxt.height = 30;
 			addChild(infoTxt);
 			
 		}

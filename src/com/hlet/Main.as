@@ -106,13 +106,13 @@ package com.hlet
 		private function initAPI():void
 		{
 			flash.external.ExternalInterface.addCallback("setLogoTxt", this.setLogoTxt);
-			flash.external.ExternalInterface.addCallback("startVod", this.startVideo);
+			flash.external.ExternalInterface.addCallback("startVod", this.startVod);
 			flash.external.ExternalInterface.addCallback("stopVideo", this.stopVideo);
+			flash.external.ExternalInterface.addCallback("startVideo", this.startVideo);
+			flash.external.ExternalInterface.addCallback("pauseVideo", this.pauseVideo);
 			flash.external.ExternalInterface.addCallback("setWindowNum", this.setWindowNum);
 			flash.external.ExternalInterface.addCallback("setServerInfo", this.setServerInfo);
 			flash.external.ExternalInterface.addCallback("setVideoServer", this.setVideoServer);
-			flash.external.ExternalInterface.addCallback("startVideo", this.startVod);
-			flash.external.ExternalInterface.addCallback("pauseVideo", this.pauseVideo);
 			flash.external.ExternalInterface.addCallback("getVersion", this.getVersion);
 			flash.external.ExternalInterface.addCallback("setVideoInfo", this.setVideoInfo);
 			flash.external.ExternalInterface.addCallback("setVideoFrame", this.setVideoFrame);
@@ -892,7 +892,7 @@ package com.hlet
 //						if (num == 1) 
 //						{
 //							currVod = vod[index];
-//							//tools.setVod(currVod);
+//							tools.setVod(currVod);
 //						}
 //					}
 //					vod[index].disvol();
@@ -1004,6 +1004,7 @@ package com.hlet
 			{
 				this.vod[0].hideBorder();
 			}
+
 			return 0;
 		}
 		

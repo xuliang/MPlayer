@@ -225,7 +225,8 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     obj.setBufferTime(window, 0.8);
     //obj.setBufferTimeMax(0, 1.5);
     //obj.startVod(0, jsession, devIdno, channel, 1, true);
-    obj.startVideo(window, devIdno, "live", "222", 1, true,"10.20.192.163", "1935");
+    //obj.startVideo(window, devIdno, "live", "222", 1, true,"10.20.192.163", "1935");
+    obj.startVideo(window,devIdno);
     //	loadConsoleTime(false, 'ttxplayer-startVideo');
     //    if(isVedio){
     //    obj.setToolBarVisible(0, 4, true);
@@ -246,11 +247,18 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     function playAll()
     {
     	previewVideo(0,"http://58.217.99.135:28080/123/111.flv",1,1,"通道01",1,1);
-    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
-    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
-    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
-    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
-    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000001_1.flv",1,1,"通道06",1,1);
+    	previewVideo(1,"http://58.217.99.135:28080/123/222.flv",1,1,"通道02",1,1);
+    	previewVideo(2,"http://58.217.99.135:28080/123/333.flv",1,1,"通道03",1,1);
+    	previewVideo(3,"http://58.217.99.135:28080/123/444.flv",1,1,"通道04",1,1);
+    	previewVideo(4,"http://58.217.99.135:28080/123/555.flv",1,1,"通道05",1,1);
+    	previewVideo(5,"http://58.217.99.135:28080/123/666.flv",1,1,"通道06",1,1);
+    	//previewVideo(5,"http://10.20.129.55/video/1110817258675978242_1_1555948801000_1555954685000/ch01_20190423000001(50405122).mp4",1,1,"通道06",1,1);
+    	//previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
+    	//previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
+    	//previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
+    	//previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
+    	//previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000001_1.flv",1,1,"通道06",1,1);
+        
         //previewVideo(0,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMCwxLDAsMA==",1,1,"通道01",1,1);
         //previewVideo(1,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMSwxLDAsMA==",1,1,"通道02",1,1);
         //previewVideo(2,"http://39.108.194.249:6604/rtmp/1551409948284/?NDUwMjQ2QkY4RkRFQjcyMjBEQUY3QzUxRjcwQzdBREQsMSwwMTg2MDAwMDAwMDQsMiwxLDAsMA==",1,1,"通道03",1,1);
@@ -270,27 +278,29 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     	}
     	    	case 2:
     	{
-    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
+    	previewVideo(1,"http://58.217.99.135:28080/123/222.flv",1,1,"通道02",1,1);
     	break;
     	}
     	    	case 3:
     	{
-    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
+    	previewVideo(2,"http://58.217.99.135:28080/123/333.flv",1,1,"通道03",1,1);
     	break;
     	}
     	    	    	case 4:
     	{
-    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道04",1,1);
+    	previewVideo(3,"http://58.217.99.135:28080/123/444.flv",1,1,"通道04",1,1);
     	break;
     	}
     	    	    	case 5:
     	{
-    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道05",1,1);
+    	previewVideo(4,"http://58.217.99.135:28080/123/555.flv",1,1,"通道05",1,1);
     	break;
     	}
     	    	    	case 6:
     	{
-    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000002_1.flv",1,1,"通道06",1,1);
+    	//previewVideo(5,"http://10.20.129.55/video/1110817258675978242_1_1555948801000_1555954685000/ch01_20190423000001(50405122).mp4",1,1,"通道06",1,1);
+    	//previewVideo(5,"http://58.217.99.135:28080/123/666.flv",1,1,"通道06",1,1);
+    	previewVideo(5,"http://10.20.129.55/video/11/12.mp4",1,1,"通道06",1,1);
     	break;
     	}
     	}
