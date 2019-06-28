@@ -4,6 +4,7 @@ package com.hlet.event
 	
 	public class PlayerEvent extends Event
 	{
+		public static const RIGHT_CLICK:String = "prightclick";
 		public static const CLICK:String = "pclick";
 		public static const DOUBLE_CLICK:String = "pdoubleclick";
 		public static const ALLTIME:String = "alltime";

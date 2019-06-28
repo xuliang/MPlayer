@@ -35,7 +35,7 @@ package com.hlet
 			var urlParm:UrlParm;
 			var Type:*="0";
 			var url:*;
-			var req:*;
+			var req:flash.net.URLRequest;
 			
 			var loc1:*;
 			urlParm = arg1;
@@ -45,11 +45,18 @@ package com.hlet
 			this.urlParm = urlParm;
 			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "beginGetServerInfo");
 			url = "http://" + urlParm.ServerIp + ":" + urlParm.ServerPort + "/3/1?MediaType=1&AVType=" + urlParm.AvType + "&DevIDNO=" + urlParm.DevIdno + "&Channel=" + urlParm.Channel + "&Type=" + Type;
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			url = "https://test.hletong.com/ywbeidou/action/hletong/regionTemplate/monitor?simNo=" + urlParm.DevIdno + "&lcn=" + urlParm.Channel + "&type=" + urlParm.AvType + "&bitStream=" + Type;	
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			flash.external.ExternalInterface.call("onDebug", "getURLAPI==" + url);
 			req = new flash.net.URLRequest(url);
+			req.requestHeaders.push(new URLRequestHeader("__sid",urlParm.Session)); 
 			try 
 			{
 				this.loader.load(req);
+
 			}
 			catch (error:Error)
 			{
@@ -70,8 +77,14 @@ package com.hlet
 			this.tim1 = flash.utils.setTimeout(this.timeout, 10000);
 			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "retryGetServerInfo");
 			url = "http://" + this.urlParm.ServerIp + ":" + this.urlParm.ServerPort + "/3/1?MediaType=1&AVType=" + this.urlParm.AvType + "&DevIDNO=" + this.urlParm.DevIdno + "&Channel=" + this.urlParm.Channel + "&Type=0";
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			url = "https://test.hletong.com/ywbeidou/action/hletong/regionTemplate/monitor?simNo=" + this.urlParm.DevIdno + "&lcn=" + this.urlParm.Channel + "&type=" + this.urlParm.AvType + "&bitStream=0";	
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			trace("getURLAPI   " + url);
 			req = new flash.net.URLRequest(url);
+			req.requestHeaders.push(new URLRequestHeader("__sid",urlParm.Session)); 
 			try 
 			{
 				this.loader.load(req);

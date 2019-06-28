@@ -151,7 +151,7 @@ if (obj) {
     }
     function setServerInfo() {
         var obj = getSWF('MPlayer');
-        var str = obj.setServerInfo("10.20.192.163","1935");
+        var str = obj.setServerInfo("10.20.129.54","1935","live/stream");
         alert(str);
     }
     function setVideoServer() {
@@ -162,12 +162,15 @@ if (obj) {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    function setFull() {
+       alert(getSWF('MPlayer').setFull());
+    };
     
     /*
      * 停止预览视频
      */
-    function stopVideo(window) {
-        swfobject.getObjectById('cmsv6flash').stopVideo(window.index);
+    function stopVideo(index) {
+        getSWF('MPlayer').stopVideo(index);
         window.isPreview = false;
     };
 
@@ -227,7 +230,7 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     //obj.startVod(0, jsession, devIdno, channel, 1, true);
     //obj.startVideo(window, devIdno, "live", "222", 1, true,"10.20.192.163", "1935");
     obj.startVideo(window,devIdno);
-    //	loadConsoleTime(false, 'ttxplayer-startVideo');
+    //	load                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ConsoleTime(false, 'ttxplayer-startVideo');
     //    if(isVedio){
     //    obj.setToolBarVisible(0, 4, true);
     //    }
@@ -246,12 +249,13 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     };
     function playAll()
     {
-    	previewVideo(0,"http://58.217.99.135:28080/123/111.flv",1,1,"通道01",1,1);
-    	previewVideo(1,"http://58.217.99.135:28080/123/222.flv",1,1,"通道02",1,1);
-    	previewVideo(2,"http://58.217.99.135:28080/123/333.flv",1,1,"通道03",1,1);
-    	previewVideo(3,"http://58.217.99.135:28080/123/444.flv",1,1,"通道04",1,1);
-    	previewVideo(4,"http://58.217.99.135:28080/123/555.flv",1,1,"通道05",1,1);
-    	previewVideo(5,"http://58.217.99.135:28080/123/666.flv",1,1,"通道06",1,1);
+    	previewVideo(0,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道01",1,1);
+    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道02",1,1);
+    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_3.flv",1,1,"通道03",1,1);
+    	previewVideo(3,"http://58.217.99.135:28080/live/stream/018600000004_4.flv",1,1,"通道04",1,1);
+    	previewVideo(4,"http://58.217.99.135:28080/live/stream/018600000004_9.flv",1,1,"通道05",1,1);
+    	previewVideo(5,"http://58.217.99.135:28080/live/stream/010000000002_1.flv",1,1,"苏A00002_1",1,1);
+    	//previewVideo(5,"http://58.217.99.135:28080/123/111.flv",1,1,"通道06",1,1);
     	//previewVideo(5,"http://10.20.129.55/video/1110817258675978242_1_1555948801000_1555954685000/ch01_20190423000001(50405122).mp4",1,1,"通道06",1,1);
     	//previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1.flv",1,1,"通道02",1,1);
     	//previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_2.flv",1,1,"通道03",1,1);
@@ -278,12 +282,12 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     	}
     	    	case 2:
     	{
-    	previewVideo(1,"http://58.217.99.135:28080/123/222.flv",1,1,"通道02",1,1);
+    	previewVideo(1,"http://58.217.99.135:28080/live/stream/018600000004_1_back.flv",1,1,"通道02",1,1);
     	break;
     	}
     	    	case 3:
     	{
-    	previewVideo(2,"http://58.217.99.135:28080/123/333.flv",1,1,"通道03",1,1);
+    	previewVideo(2,"http://58.217.99.135:28080/live/stream/018600000004_1_back.flv",1,1,"通道03",1,1);
     	break;
     	}
     	    	    	case 4:
@@ -300,13 +304,168 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
     	{
     	//previewVideo(5,"http://10.20.129.55/video/1110817258675978242_1_1555948801000_1555954685000/ch01_20190423000001(50405122).mp4",1,1,"通道06",1,1);
     	//previewVideo(5,"http://58.217.99.135:28080/123/666.flv",1,1,"通道06",1,1);
-    	previewVideo(5,"http://10.20.129.55/video/11/12.mp4",1,1,"通道06",1,1);
+    	previewVideo(5,"http://58.217.99.135:31117/20190620/010000000006/6402/6dada9b789ba42eba113445cdb7866a5/02_64_6402_02_6dada9b789ba42eba113445cdb7866a5.mp4",1,1,"通道06",1,1);
     	break;
     	}
     	}
     }
-    
+    /*
+ * 控件回调事件	
+ * index 视频下标
+ * type 消息类型 select:选择视频，full:全屏,norm：退出全屏 start:开始播放 paus:暂停，stop:停止 play：暂停或停止后重新播放
+ * sound:开启声音,silent:静音 neterror:网络异常 videoerror：视频错误 
+ */
+function onVideoMsg(index,type) {
+
+//alert(index);
+}
+
+/**
+ * 添加菜单
+ * @param 窗口下标
+ * @param menuId
+ * @param menuName
+ * @param part  是否分隔符 1,0
+ */
+ function addVideoMenu(index, menuId, menuName, part) {
+	if (!isInitFinished) {
+		return ;
+	}
+	getSWF('MPlayer').addVideoMenu(index, menuId, menuName, part);
+};
+
+/**
+ *  删除菜单
+ *  @param 窗口下标
+ *  @param menuId
+ */
+function delVideoMenu(index, menuId) {
+	if (!isInitFinished) {
+		return ;
+	}
+	getSWF('MPlayer').delVideoMenu(index, menuId);
+};
+
+/**
+ *  清空窗口菜单
+ *  @param 窗口下标
+ */
+function clearVideoMenu(index) {
+	if (!isInitFinished) {
+		return ;
+	}
+	getSWF('MPlayer').clearVideoMenu(index);
+};
+function setViewSize(viewSize) {
+//alert(viewSize);
+	for (var i = 0; i < 6; ++ i) {
+		getSWF('MPlayer').setVideoFrame(i, viewSize);
+	}
+}
+function startListen(devIdno, chn)
+{
+    getSWF('MPlayer').setListenParam(1);
+	getSWF('MPlayer').startListen("F383E5E185584E75AB02D421F6BB10B9", "18600000004", 2, "58.217.99.135", 21935);
+}
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     function setBrightness() {
+     //alert('111');
+        getSWF('MPlayer').setBrightness(100);
+    };
+         function setContrast() {
+     //alert('111');
+        getSWF('MPlayer').setContrast(100);
+    };
+         function setSaturation() {
+     //alert('111');
+        getSWF('MPlayer').setSaturation(100);
+    };
+         function setHue() {
+     //alert('111');
+        getSWF('MPlayer').setHue(100);
+    };
+             function resetColor() {
+     //alert('111');
+        getSWF('MPlayer').resetColor();
+    };
+                 function setFull() {
+     //alert('111');
+        getSWF('MPlayer').setFull();
+    };
+     function startRTMP() {
+     for(var i=0;i<10;i++)
+     {
+          getSWF('MPlayer').stopVideo(i);
+    getSWF('MPlayer').setVideoInfo(i, "title"+i);
+    getSWF('MPlayer').setBufferTime(i, 1);
+    getSWF('MPlayer').setBufferTimeMax(i, 5);
+     getSWF('MPlayer').startRTMP(i,"1080_2");
+     }
+}
+function startRTMP111111111() {
+     getSWF('MPlayer').stopVideo(0);
+    getSWF('MPlayer').setVideoInfo(0, "title");
+    getSWF('MPlayer').setBufferTime(0, 1);
+    getSWF('MPlayer').setBufferTimeMax(0, 5);
+     getSWF('MPlayer').startRTMP(0,"1080_2");
+     /*
+     getSWF('MPlayer').startRTMP(1,"1080_1");
+     getSWF('MPlayer').startRTMP(2,"1080_1");
+     getSWF('MPlayer').startRTMP(3,"1080_1");
+     getSWF('MPlayer').startRTMP(4,"1080_1");
+     getSWF('MPlayer').startRTMP(5,"1080_1");
+     */
+     /*
+        getSWF('MPlayer').startRTMP(6,"10000000001_1");
+        getSWF('MPlayer').startRTMP(7,"10000000001_2");
+        getSWF('MPlayer').startRTMP(8,"10000000001_3");
+        getSWF('MPlayer').startRTMP(9,"10000000001_4");
+        getSWF('MPlayer').startRTMP(10,"10000000001_5");
+        getSWF('MPlayer').startRTMP(11,"10000000001_6");
+        */
+        /*
+        getSWF('MPlayer').startRTMP(0,"1080","1","10.20.129.54","1935");
+        getSWF('MPlayer').startRTMP(1,"1080");
+        getSWF('MPlayer').startRTMP(2,"1080");
+        getSWF('MPlayer').startRTMP(3,"1080");
+        getSWF('MPlayer').startRTMP(4,"1080");
+        getSWF('MPlayer').startRTMP(5,"1080");
+        getSWF('MPlayer').startRTMP(6,"1080");
+        getSWF('MPlayer').startRTMP(7,"1080");
+        getSWF('MPlayer').startRTMP(8,"1080");
+        getSWF('MPlayer').startRTMP(9,"1080");
+        getSWF('MPlayer').startRTMP(10,"1080");
+        getSWF('MPlayer').startRTMP(11,"1080");
+        getSWF('MPlayer').startRTMP(12,"1080");
+        getSWF('MPlayer').startRTMP(13,"1080");
+        getSWF('MPlayer').startRTMP(14,"1080");
+        getSWF('MPlayer').startRTMP(15,"1080");
+        getSWF('MPlayer').startRTMP(16,"1080");
+        */
+        /*
+        getSWF('MPlayer').startRTMP(17,"1080");
+        getSWF('MPlayer').startRTMP(18,"1080");
+        getSWF('MPlayer').startRTMP(19,"1080");
+        getSWF('MPlayer').startRTMP(20,"1080");
+        getSWF('MPlayer').startRTMP(21,"1080");
+        getSWF('MPlayer').startRTMP(22,"1080");
+        getSWF('MPlayer').startRTMP(23,"1080");
+        getSWF('MPlayer').startRTMP(24,"1080");
+        getSWF('MPlayer').startRTMP(25,"1080");
+
+        getSWF('MPlayer').startRTMP(26,"1080");
+        getSWF('MPlayer').startRTMP(27,"1080");
+        getSWF('MPlayer').startRTMP(28,"1080");
+        getSWF('MPlayer').startRTMP(29,"1080");
+        getSWF('MPlayer').startRTMP(30,"1080");
+        getSWF('MPlayer').startRTMP(31,"1080");
+        getSWF('MPlayer').startRTMP(32,"1080");
+        getSWF('MPlayer').startRTMP(33,"1080");
+        getSWF('MPlayer').startRTMP(34,"1080");
+        getSWF('MPlayer').startRTMP(35,"1080");
+        getSWF('MPlayer').startRTMP(36,"1080");
+        */
+    };
         </script> 
 
         <input type="button" onclick="setWindowNum(1)" value="1"/>
@@ -320,7 +479,7 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
         <input type="button" onclick="getVersion()" value="获取播放器版本号"/>
         <input type="button" onclick="setServerInfo()" value="设置服务器信息"/>
         <input type="button" onclick="setVideoServer()" value="设置video服务器信息"/>
-        <input type="button" onclick="startVideoReplay()" value="startVideo"/>
+        <input type="button" onclick="startRTMP()" value="startRTMP"/>
         <input type="button" onclick="playAll()" value="startVod"/>
 <input type="button" onclick="play(1)" value="通道1"/>
 <input type="button" onclick="play(2)" value="通道2"/>
@@ -328,5 +487,21 @@ function previewVideo(window, devIdno, channel, stream, title, viewCloseTime, ar
 <input type="button" onclick="play(4)" value="通道4"/>
 <input type="button" onclick="play(5)" value="通道5"/>
 <input type="button" onclick="play(6)" value="通道6"/>
+<input type="button" onclick="stopVideo(0)" value="停止1"/>
+<input type="button" onclick="stopVideo(1)" value="停止2"/>
+<input type="button" onclick="stopVideo(2)" value="停止3"/>
+<input type="button" onclick="stopVideo(3)" value="停止4"/>
+<input type="button" onclick="stopVideo(4)" value="停止5"/>
+<input type="button" onclick="stopVideo(5)" value="停止6"/>
+<input type="button" onclick="setViewSize('full')" value="铺满"/>
+<input type="button" onclick="setViewSize('16:9')" value="16:9"/>
+<input type="button" onclick="setViewSize('4:3')" value="4:3"/>
+<input type="button" onclick="startListen(1,2)" value="监听"/>
+<input type="button" onclick="setBrightness()" value="亮度"/>
+<input type="button" onclick="setContrast()" value="对比度"/>
+<input type="button" onclick="setSaturation()" value="饱和度"/>
+<input type="button" onclick="setHue()" value="色相值"/>
+<input type="button" onclick="resetColor()" value="重置色彩"/>
+<input type="button" onclick="setFull()" value="全屏"/>
    </body>
 </html>

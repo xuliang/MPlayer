@@ -2,7 +2,6 @@ package com.hlet
 {
 	public class UrlParm extends Object
 	{
-		
 		public var ServerIp:*;		
 		public var ServerPort:*;		
 		public var Session:*;		

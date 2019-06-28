@@ -100,7 +100,8 @@ package com.hlet
 			this.infoBar.infoTxt.text = loc1;
 			var format:TextFormat=new TextFormat();
 			format.color = 0xffffff;
-			format.size=14;
+			format.size=12;
+			format.font="微软雅黑";
 			this.infoBar.infoTxt.setTextFormat(format);
 			return;
 		}

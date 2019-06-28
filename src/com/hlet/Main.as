@@ -10,6 +10,7 @@ package com.hlet
 	import com.hlet.event.VolEvent;
 	
 	import flash.display.MovieClip;
+	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.events.ContextMenuEvent;
@@ -17,11 +18,13 @@ package com.hlet
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
+	import flash.filters.ColorMatrixFilter;
 	import flash.media.Microphone;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	import flash.utils.Timer;
-	import flash.display.StageAlign;
+	
+	import fl.motion.ColorMatrix;
 	
 	public class Main extends flash.display.MovieClip
 	{
@@ -32,7 +35,8 @@ package com.hlet
 		private var currVod:Player;		
 		private var lang:Language;		
 		private var serverIP:String="";		
-		private var serverPort:String="";		
+		private var serverPort:String="";	
+		private var serverApp:String="";	
 		private var cfg:Config;		
 		private var version:*="20190304";		
 		private var ver:*="1.0.0";		
@@ -71,10 +75,12 @@ package com.hlet
 			this.CopyRight = new ContextMenuItem("Copyright © "+year+" hlet.com. All right reserved.");
 			this.VerMenu.separatorBefore = true;
 			stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
+			stage
 			this.initEvent();
 			this.initAPI();
 			//this.tools.changeSize();
 			RectManager.stage = stage;
+			
 			this.resizeVod();
 		}
 		
@@ -98,13 +104,22 @@ package com.hlet
 			//this.tools.addEventListener(PlayEvent.PAUS, this.fpaus);
 			//this.tools.addEventListener(PlayEvent.STOP, this.fstop);
 			this._contextMenu.hideBuiltInItems();
-			this.contextMenu = this._contextMenu;
+			//this.contextMenu = this._contextMenu;//隐藏菜单
 			this._contextMenu.addEventListener(flash.events.ContextMenuEvent.MENU_SELECT, this.clickMenu);
 			return;
 		}
 		
 		private function initAPI():void
 		{
+			flash.external.ExternalInterface.addCallback("setBrightness", this.setBrightness);//设置亮度值，值的大小是 -255--255   0为中间值，向右为亮向左为暗。
+			flash.external.ExternalInterface.addCallback("setContrast", this.setContrast);//设置对比度值，值的大小是 -255--255  127.5为中间值，向右对比鲜明向左
+			flash.external.ExternalInterface.addCallback("setSaturation", this.setSaturation);//设置饱和度值，值的大小是 -255--255   1为中间值，0为灰度值（即黑白相片）
+			flash.external.ExternalInterface.addCallback("setHue", this.setHue);//设置色相值，值的大小是 -255--255  0为中间值
+			flash.external.ExternalInterface.addCallback("resetColor", this.resetColor);//重置色彩
+			//flash.external.ExternalInterface.addCallback("setVol", this.fvol);
+			flash.external.ExternalInterface.addCallback("setFull", this.setFull);
+			flash.external.ExternalInterface.addCallback("startRTMP", this.startRTMP);
+			////////////////////////////////////////////////////////////////////////////////////////
 			flash.external.ExternalInterface.addCallback("setLogoTxt", this.setLogoTxt);
 			flash.external.ExternalInterface.addCallback("startVod", this.startVod);
 			flash.external.ExternalInterface.addCallback("stopVideo", this.stopVideo);
@@ -149,6 +164,59 @@ package com.hlet
 			flash.external.ExternalInterface.addCallback("setToolBarVisible", this.setToolBarVisible);
 			return;
 		}
+		
+		public function setBrightness(value:Number):void
+		{
+			//**调整亮度**//
+			var ld_Matrix:ColorMatrix=new ColorMatrix();
+			var ld_Filter:ColorMatrixFilter=new ColorMatrixFilter();
+			ld_Matrix.SetBrightnessMatrix(value);  //设置亮度值，值的大小是 -255--255   0为中间值，向右为亮向左为暗。
+			ld_Filter.matrix = ld_Matrix.GetFlatArray();
+			this.filters = [ld_Filter];
+			//ld_MC.filters = [];//去除滤镜
+		}
+		public function setContrast(value:Number):void
+		{
+			//**调整对比度**//
+			var db_Matrix:ColorMatrix=new ColorMatrix();
+			var db_Filter:ColorMatrixFilter=new ColorMatrixFilter();
+			db_Matrix.SetContrastMatrix(value);  //设置对比度值，值的大小是 -255--255  127.5为中间值，向右对比鲜明向左对比偏暗。
+			db_Filter.matrix = db_Matrix.GetFlatArray();
+			this.filters = [db_Filter];
+			//db_MC.filters = [];//去除滤镜
+		}
+		public function setSaturation(value:Number):void
+		{
+			//**调整饱和度**//
+			var bh_Matrix:ColorMatrix=new ColorMatrix();
+			var bh_Filter:ColorMatrixFilter=new ColorMatrixFilter();
+			bh_Matrix.SetSaturationMatrix(value);  //设置饱和度值，值的大小是 -255--255   1为中间值，0为灰度值（即黑白相片）。
+			bh_Filter.matrix = bh_Matrix.GetFlatArray();
+			this.filters = [bh_Filter];
+			//bh_MC.filters = [];//去除滤镜
+		}
+		public function setHue(value:Number):void
+		{
+			var sx_Matrix:ColorMatrix=new ColorMatrix();
+			var sx_Filter:ColorMatrixFilter=new ColorMatrixFilter();
+			sx_Matrix.SetHueMatrix(value);  //设置色相值，值的大小是 -255--255  0为中间值，向右向左一试便知。
+			sx_Filter.matrix = sx_Matrix.GetFlatArray();
+			this.filters = [sx_Filter];
+			//sx_MC.filters = [];//去除滤镜
+		}
+		public function resetColor():void
+		{
+			this.filters = [];//去除滤镜
+		}
+		public function setFull():void
+		{
+			//Security.allowDomain() 
+			stage.displayState = StageDisplayState.FULL_SCREEN   //设置成全屏
+			//this.currVod.onFull(new PlayEvent("full"));
+			//this.onFull(new PlayEvent("full"));
+			//return 0;
+		}
+		
 		public function setToolBarVisible(arg1:int, arg2:int, arg3:String):int
 		{
 			if (arg1 < 0) 
@@ -291,7 +359,7 @@ package com.hlet
 			this.currVod.Paus();
 			return;
 		}
-		
+
 		function ffull(arg1:PlayEvent):void
 		{
 			stage.displayState = flash.display.StageDisplayState.FULL_SCREEN;
@@ -451,10 +519,11 @@ package com.hlet
 			return this.version;
 		}
 		
-		public function setServerInfo(arg1:String, arg2:String):int
+		public function setServerInfo(arg1:String, arg2:String, arg3:String):int
 		{
 			this.serverIP = arg1;
 			this.serverPort = arg2;
+			this.serverApp = arg3;
 			return 0;
 		}
 		
@@ -773,7 +842,49 @@ package com.hlet
 			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "stopListen");
 			return;
 		}
-		
+		public function startRTMP(arg1:int,channel:String):int
+		{
+			if (arg1 < 0) 
+			{
+				return 3;
+			}
+			if (this.num == 0) 
+			{
+				return 1;
+			}
+			if (arg1 >= this.num) 
+			{
+				return 2;
+			}
+			
+			if (this.vod[arg1] == null) 
+			{
+				this.vod[arg1] = new Player();
+				addChildAt(this.vod[arg1], 0);
+				this.vod[arg1].id = arg1;
+				this.vod[arg1].addEventListener(PlayerEvent.RIGHT_CLICK, this.selectVod);
+				this.vod[arg1].addEventListener(PlayerEvent.CLICK, this.selectVod);
+				this.vod[arg1].addEventListener(PlayerEvent.DOUBLE_CLICK, this.vodFull);
+				this.vod[arg1].addEventListener(PlayerEvent.ALLTIME, this.getAlltime);
+				this.vod[arg1].addEventListener(PlayEvent.SOUND, this.onSound);
+				this.vod[arg1].addEventListener(PlayEvent.FULL, this.onFull);
+				this.vod[arg1].addEventListener(PlayEvent.NORM, this.onNorm);
+				this.vod[arg1].setRect(this.rect[arg1]);
+			}
+			this.vod[arg1].param = "";
+			this.vod[arg1].flvstat = 2;
+			this.vod[arg1].playRTMP(channel);
+			//this.vod[arg1].disvol();
+//			if (this.num == 1) 
+//			{
+//				this.vod[arg1].ablevol();
+//				this.currVod = this.vod[arg1];
+//				//this.tools.setVod(this.currVod);
+//			}
+			this.addEventListener(flash.events.Event.ENTER_FRAME, this.refreshTime);
+
+			return 0;
+		}
 		public function startVod(arg1:int, arg2:String, arg3:String, arg4:String, arg5:String, arg6:Boolean, arg7:String="", arg8:String=""):int
 		{
 			var index:int;
@@ -838,6 +949,7 @@ package com.hlet
 				this.vod[index] = new Player();
 				addChildAt(this.vod[index], 0);
 				this.vod[index].id = index;
+				this.vod[index].addEventListener(PlayerEvent.RIGHT_CLICK, this.selectVod);
 				this.vod[index].addEventListener(PlayerEvent.CLICK, this.selectVod);
 				this.vod[index].addEventListener(PlayerEvent.DOUBLE_CLICK, this.vodFull);
 				this.vod[index].addEventListener(PlayerEvent.ALLTIME, this.getAlltime);
@@ -851,7 +963,7 @@ package com.hlet
 				//this.tools.setVod(this.currVod);
 			}
 			this.vod[index].disvol();
-			this.vod[index].iswait = false;
+			//this.vod[index].iswait = false;
 			this.vod[index].showLoading();
 			um = null;
 			if (this.vod[index].urlManager != null) 
@@ -924,6 +1036,7 @@ package com.hlet
 				this.vod[arg1] = new Player();
 				addChildAt(this.vod[arg1], 0);
 				this.vod[arg1].id = arg1;
+				this.vod[arg1].addEventListener(PlayerEvent.RIGHT_CLICK, this.selectVod);
 				this.vod[arg1].addEventListener(PlayerEvent.CLICK, this.selectVod);
 				this.vod[arg1].addEventListener(PlayerEvent.DOUBLE_CLICK, this.vodFull);
 				this.vod[arg1].addEventListener(PlayerEvent.ALLTIME, this.getAlltime);
@@ -974,6 +1087,7 @@ package com.hlet
 					this.vod[loc1] = new Player();
 					this.vod[loc1].updatePic(this.cfg);
 					addChildAt(this.vod[loc1], 0);
+					this.vod[loc1].addEventListener(PlayerEvent.RIGHT_CLICK, this.selectVod);
 					this.vod[loc1].addEventListener(PlayerEvent.CLICK, this.selectVod);
 					this.vod[loc1].addEventListener(PlayerEvent.DOUBLE_CLICK, this.vodFull);
 					this.vod[loc1].addEventListener(PlayerEvent.ALLTIME, this.getAlltime);
@@ -981,6 +1095,9 @@ package com.hlet
 					this.vod[loc1].addEventListener(PlayEvent.FULL, this.onFull);
 					this.vod[loc1].addEventListener(PlayEvent.NORM, this.onNorm);
 				}
+				this.vod[loc1].serverIP=this.serverIP;
+				this.vod[loc1].serverPort=this.serverPort;
+				this.vod[loc1].serverApp=this.serverApp;
 				this.vod[loc1].setRect(this.rect[loc1]);
 				//this.vod[loc1].setNorm();
 				this.vod[loc1].id = loc1;
@@ -1062,7 +1179,7 @@ package com.hlet
 			return 0;
 		}
 		
-		private function resizeVod():void
+		public function resizeVod():void
 		{
 			var loc2:*=undefined;
 			if (stage.displayState == flash.display.StageDisplayState.FULL_SCREEN) 

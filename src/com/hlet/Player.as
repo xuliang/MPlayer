@@ -4,6 +4,7 @@ package com.hlet
 	import com.hlet.btn.VideoButton;
 	import com.hlet.event.PlayEvent;
 	import com.hlet.event.PlayerEvent;
+	
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.events.AsyncErrorEvent;
@@ -23,6 +24,7 @@ package com.hlet
 	import flash.system.Security;
 	import flash.utils.Timer;
 	
+	[SWF(backgroundColor="#000000")]
 	public class Player extends flash.display.MovieClip
 	{		
 		public var videoConnection:flash.net.NetConnection;		
@@ -53,11 +55,14 @@ package com.hlet
 		private var dbClickMC:ClickMC;		
 		public var serverIP:String="";		
 		public var serverPort:String="";		
+		public var serverApp:String="";		
 		public var serverId:int=-1;		
 		public var Menu:Array;		
 		public var urlParm:UrlParm;		
 		public var urlManager:UrlManager;		
 		public var isvol:Boolean;
+		private var bufferTime:Number;
+		private var bufferTimeMax:Number;
 		
 		public function Player()
 		{
@@ -67,21 +72,10 @@ package com.hlet
 			this.doubleClickEnabled = true;
 			this.Menu = new Array();
 			this.video = new flash.media.Video();
-			this.videoConnection = new flash.net.NetConnection();
-			this.videoConnection.addEventListener(flash.events.SecurityErrorEvent.SECURITY_ERROR, this.securityErrorHandler);
-			this.videoConnection.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.nstat);
-			this.videoConnection.connect(null);
-			this.videoConnection.maxPeerConnections = 100;
-			this.videoStream = new flash.net.NetStream(this.videoConnection);
-			this.videoStream.bufferTime = 10;
-			this.videoStream.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.nstat);
-			this.videoStream.addEventListener(flash.events.AsyncErrorEvent.ASYNC_ERROR, this.asyncErrorHandler);
-			this.videoStream.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.mistake);
-			this.video.attachNetStream(this.videoStream);
-			addChild(this.video);
-			this.metaListener = new Object();
-			this.metaListener.onMetaData = this.onMetaData;
-			this.videoStream.client = this.metaListener;
+
+			//initConn();
+			
+			
 			this.isvol = true;
 			this.ispaus = true;
 			this.isfull = false;
@@ -118,14 +112,67 @@ package com.hlet
 			this.dbClickMC.visible = true;
 			this.dbClickMC.addEventListener(flash.events.MouseEvent.DOUBLE_CLICK, this.dbclick);
 			this.dbClickMC.addEventListener(flash.events.MouseEvent.CLICK, this.fclick);
+			this.dbClickMC.addEventListener(flash.events.MouseEvent.RIGHT_CLICK, this.frightclick);
 			addChild(this.dbClickMC);
 			this.playbtn = new VideoButton();
 			this.playbtn.addEventListener(PlayEvent.PLAY, this.onPlay);
 			addChild(this.playbtn);
 			addChild(this.CtrlPan);
+		}
+		public function onBWDone():void
+		{
+			trace("onBWDone");
 			return;
 		}
-		
+		private function initConn():void
+		{
+			this.videoConnection = new flash.net.NetConnection();
+			this.videoConnection.addEventListener(flash.events.SecurityErrorEvent.SECURITY_ERROR, this.securityErrorHandler);
+			this.videoConnection.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.netStatusHandler);
+			this.videoConnection.client=this;
+			this.videoConnection.connect("rtmp://"+this.serverIP+":"+this.serverPort+"/"+this.serverApp);
+			this.videoConnection.maxPeerConnections = 100;
+			
+		}
+		public function playRTMP(arg1:String):void
+		{
+			this.flvurl = arg1;
+			initConn();
+		}
+		/*
+		private function netStatusHandler(event:NetStatusEvent):void
+		{
+			trace("1Player ID:"+this.id+", event.info.level: " + event.info.level + "\n", "event.info.code: " + event.info.code);
+			switch (event.info.code)
+			{
+				case "NetConnection.Connect.Success":
+					//doVideo(nc);
+					this.videoStream = new flash.net.NetStream(this.videoConnection);
+					this.videoStream.bufferTime = this.bufferTime;
+					this.videoStream.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.nstat);
+					this.videoStream.addEventListener(flash.events.AsyncErrorEvent.ASYNC_ERROR, this.asyncErrorHandler);
+					this.videoStream.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.mistake);
+					this.video.attachNetStream(this.videoStream);
+					addChild(this.video);
+					this.metaListener = new Object();
+					this.metaListener.onMetaData = this.onMetaData;
+					this.videoStream.client = this.metaListener;
+					break;
+				case "NetConnection.Connect.Failed":
+					initConn();
+					break;
+				case "NetConnection.Connect.Closed":
+					initConn();
+					break;
+				case "NetConnection.Connect.Rejected":
+					break;
+				case "NetStream.Play.Stop":
+					break;
+				case "NetStream.Play.StreamNotFound":
+					break;
+			}
+		}
+		*/
 		function refreshBuffer(arg1:flash.events.Event):void
 		{
 			var loc1:*=Math.round(100 * this.videoStream.bufferLength / this.videoStream.bufferTime);
@@ -178,17 +225,33 @@ package com.hlet
 			return;
 		}
 		
-		function nstat(arg1:flash.events.NetStatusEvent):void
+		function netStatusHandler(arg1:flash.events.NetStatusEvent):void
 		{
 			//trace("nstat-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
-			trace("playVideo " + arg1.info.code);
-			if (this.iswait) 
-			{
-				return;
-			}
+			//trace("playVideo " + arg1.info.code);
+			trace("2Player ID:"+this.id+", event.info.level: " + arg1.info.level + "\n", "event.info.code: " + arg1.info.code);
+//			if (this.iswait) 
+//			{
+//				return;
+//			}
 			var loc1:*=arg1.info.code;
 			switch (loc1) 
 			{
+				case "NetConnection.Connect.Success":
+					//doVideo(nc);
+					this.videoStream = new flash.net.NetStream(this.videoConnection);
+					this.videoStream.bufferTime = this.bufferTime;
+					this.videoStream.bufferTimeMax = this.bufferTimeMax;
+					this.videoStream.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.netStatusHandler);
+					this.videoStream.addEventListener(flash.events.AsyncErrorEvent.ASYNC_ERROR, this.asyncErrorHandler);
+					this.videoStream.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.mistake);
+					this.video.attachNetStream(this.videoStream);
+					addChild(this.video);
+					this.metaListener = new Object();
+					this.metaListener.onMetaData = this.onMetaData;
+					this.videoStream.client = this.metaListener;
+					this.Play();
+					break;
 				case "NetStream.Buffer.Empty":
 				{
 					this.addEventListener(flash.events.Event.ENTER_FRAME, this.refreshBuffer);
@@ -200,9 +263,11 @@ package com.hlet
 					this.ldinfo.visible = false;
 					break;
 				}
+				case "NetConnection.Connect.Closed":
 				case "NetStream.Play.Failed":
 				case "NetStream.Play.StreamNotFound":
 				{
+					initConn();
 					this.ispaus = true;
 					this.ldinfo.visible = false;
 					this.msg.showMsg("connectError");
@@ -246,6 +311,28 @@ package com.hlet
 			return;
 		}
 		
+		private function fclick(arg1:flash.events.MouseEvent):void
+		{
+			trace("fclick");
+			if (this.isfull) 
+			{
+				return;
+			}
+			//trace("click player");
+			dispatchEvent(new PlayerEvent("pclick"));
+			return;
+		}
+		private function frightclick(arg1:flash.events.MouseEvent):void
+		{
+			trace("frightclick");
+			if (this.isfull) 
+			{
+				return;
+			}
+			//trace("click player");
+			dispatchEvent(new PlayerEvent("prightclick"));
+			return;
+		}
 		public function setVideoTbarBgColor(arg1:String):void
 		{
 			this.CtrlPan.setColor(arg1);
@@ -435,6 +522,7 @@ package com.hlet
 		
 		public function Play():void
 		{
+
 			this.serverIP = "";
 			this.serverPort = "";
 			this.serverId = -1;
@@ -449,10 +537,12 @@ package com.hlet
 				this.urlManager.getUrl1();
 				this.urlManager.retry = true;
 			}
+			this.disvol()
 			this.dbClickMC.Hide();
 			this.playbtn.visible = false;
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "play");
 			return;
+			
 		}
 		
 		public function Stop():void
@@ -617,22 +707,26 @@ package com.hlet
 		
 		function onTimer(arg1:flash.events.Event):*
 		{
-			var loc1:*=this.videoStream.bytesLoaded;
-			var loc2:*=(loc1 - this.oldBytes) / 512;
+			//trace("playbackBytesPerSecond:"+this.videoStream.info.playbackBytesPerSecond);
+			//trace("BufferLength:"+this.videoStream.bufferLength+"\tTime:"+this.videoStream.time+"\tcurrentFPS:"+this.videoStream.currentFPS);
+			//var loc1:*=this.videoStream.bytesLoaded;
+			//var loc2:*=(loc1 - this.oldBytes) / 512;
+			var loc2:*=this.videoStream.info.playbackBytesPerSecond/1024;
 			this.CtrlPan.setBps(loc2);
-			this.oldBytes = loc1;
+			//this.oldBytes = loc1;
 			return;
 		}
 		
 		public function setBufferTime(arg1:Number):void
 		{
-			this.videoStream.bufferTime = arg1;
-			return;
+			//this.videoStream.bufferTime = arg1;
+			this.bufferTime = arg1;
 		}
 		
 		public function setBufferTimeMax(arg1:Number):void
 		{
-			this.videoStream.bufferTimeMax = arg1;
+			//this.videoStream.bufferTimeMax = arg1;
+			this.bufferTimeMax = arg1;
 			return;
 		}
 		
@@ -781,18 +875,7 @@ package com.hlet
 			this.CtrlPan.visible = false;
 			return;
 		}
-		
-		private function fclick(arg1:flash.events.MouseEvent):void
-		{
-			trace("fclick");
-			if (this.isfull) 
-			{
-				return;
-			}
-			//trace("click player");
-			dispatchEvent(new PlayerEvent("pclick"));
-			return;
-		}
+
 		
 		public function playFLV(arg1:String):void
 		{
