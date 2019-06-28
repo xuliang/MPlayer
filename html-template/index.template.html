@@ -58,6 +58,7 @@
             params.bgcolor = "${bgcolor}";
             params.allowscriptaccess = "sameDomain";
             params.allowfullscreen = "true";
+            params.menu="false";
             var attributes = {};
             attributes.id = "${application}";
             attributes.name = "${application}";
@@ -96,6 +97,7 @@
                 <param name="bgcolor" value="${bgcolor}" />
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="true" />
+                <param name="menu" value="false"> 
                 <!--[if !IE]>-->
                 <object type="application/x-shockwave-flash" data="${swf}.swf" width="${width}" height="${height}">
                     <param name="quality" value="high" />
@@ -397,10 +399,15 @@ function startListen(devIdno, chn)
      {
           getSWF('MPlayer').stopVideo(i);
     getSWF('MPlayer').setVideoInfo(i, "title"+i);
-    getSWF('MPlayer').setBufferTime(i, 1);
+    getSWF('MPlayer').setBufferTime(i, 1+i);
     getSWF('MPlayer').setBufferTimeMax(i, 5);
      getSWF('MPlayer').startRTMP(i,"1080_2");
      }
+}
+function resetVideo()
+{
+getSWF('MPlayer').stopVideo(0);
+getSWF('MPlayer').reSetVideo(0);
 }
 function startRTMP111111111() {
      getSWF('MPlayer').stopVideo(0);
@@ -502,6 +509,6 @@ function startRTMP111111111() {
 <input type="button" onclick="setSaturation()" value="饱和度"/>
 <input type="button" onclick="setHue()" value="色相值"/>
 <input type="button" onclick="resetColor()" value="重置色彩"/>
-<input type="button" onclick="setFull()" value="全屏"/>
+<input type="button" onclick="resetVideo()" value="清除1"/>
    </body>
 </html>

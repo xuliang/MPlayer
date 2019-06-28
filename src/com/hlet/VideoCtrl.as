@@ -8,6 +8,7 @@ package com.hlet
 	import com.hlet.event.PlayEvent;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
@@ -41,7 +42,7 @@ package com.hlet
 			addChild(btnPlay);
 			addChild(btnSound);
 			addChild(btnFull);
-			
+			addEventListener(MouseEvent.RIGHT_CLICK, doNothing); 
 			
 			this.btnPlay.addEventListener(PlayEvent.PLAY, this.dispatch);
 			this.btnPlay.addEventListener(PlayEvent.PAUS, this.dispatch);
@@ -67,7 +68,10 @@ package com.hlet
 			//}
 			return;
 		}
-		
+		private function doNothing(e:MouseEvent):void
+		{
+			//屏蔽右键，什么都不做。
+		}
 		public function setToolBarVisible(arg1:int, arg2:Boolean):int
 		{
 //			if (arg1 >= 0 && arg1 < this.btns.length) 

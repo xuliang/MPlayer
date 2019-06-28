@@ -72,7 +72,7 @@ package com.hlet
 			this.doubleClickEnabled = true;
 			this.Menu = new Array();
 			this.video = new flash.media.Video();
-
+			addChild(this.video);
 			//initConn();
 			
 			
@@ -139,40 +139,7 @@ package com.hlet
 			this.flvurl = arg1;
 			initConn();
 		}
-		/*
-		private function netStatusHandler(event:NetStatusEvent):void
-		{
-			trace("1Player ID:"+this.id+", event.info.level: " + event.info.level + "\n", "event.info.code: " + event.info.code);
-			switch (event.info.code)
-			{
-				case "NetConnection.Connect.Success":
-					//doVideo(nc);
-					this.videoStream = new flash.net.NetStream(this.videoConnection);
-					this.videoStream.bufferTime = this.bufferTime;
-					this.videoStream.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.nstat);
-					this.videoStream.addEventListener(flash.events.AsyncErrorEvent.ASYNC_ERROR, this.asyncErrorHandler);
-					this.videoStream.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.mistake);
-					this.video.attachNetStream(this.videoStream);
-					addChild(this.video);
-					this.metaListener = new Object();
-					this.metaListener.onMetaData = this.onMetaData;
-					this.videoStream.client = this.metaListener;
-					break;
-				case "NetConnection.Connect.Failed":
-					initConn();
-					break;
-				case "NetConnection.Connect.Closed":
-					initConn();
-					break;
-				case "NetConnection.Connect.Rejected":
-					break;
-				case "NetStream.Play.Stop":
-					break;
-				case "NetStream.Play.StreamNotFound":
-					break;
-			}
-		}
-		*/
+
 		function refreshBuffer(arg1:flash.events.Event):void
 		{
 			var loc1:*=Math.round(100 * this.videoStream.bufferLength / this.videoStream.bufferTime);
@@ -246,7 +213,7 @@ package com.hlet
 					this.videoStream.addEventListener(flash.events.AsyncErrorEvent.ASYNC_ERROR, this.asyncErrorHandler);
 					this.videoStream.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.mistake);
 					this.video.attachNetStream(this.videoStream);
-					addChild(this.video);
+					//addChild(this.video);
 					this.metaListener = new Object();
 					this.metaListener.onMetaData = this.onMetaData;
 					this.videoStream.client = this.metaListener;

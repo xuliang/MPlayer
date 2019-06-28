@@ -75,7 +75,7 @@ package com.hlet
 			this.CopyRight = new ContextMenuItem("Copyright © "+year+" hlet.com. All right reserved.");
 			this.VerMenu.separatorBefore = true;
 			stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-			stage
+			
 			this.initEvent();
 			this.initAPI();
 			//this.tools.changeSize();
@@ -106,6 +106,8 @@ package com.hlet
 			this._contextMenu.hideBuiltInItems();
 			//this.contextMenu = this._contextMenu;//隐藏菜单
 			this._contextMenu.addEventListener(flash.events.ContextMenuEvent.MENU_SELECT, this.clickMenu);
+			
+			stage.showDefaultContextMenu =false; 
 			return;
 		}
 		

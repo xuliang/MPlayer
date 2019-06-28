@@ -19,8 +19,14 @@ package com.hlet.btn
 			this.buttonMode = true;
 			addChild(innerBtn1);
 			addEventListener(flash.events.MouseEvent.CLICK, this.onPlay);
+			addEventListener(MouseEvent.RIGHT_CLICK, doNothing); 
 			innerBtn1.enable();
 			this.visible = false;
+
+		}
+		private function doNothing(e:MouseEvent):void
+		{
+			//屏蔽右键，什么都不做。
 		}
 		public function onPlay(arg1:flash.events.Event):void
 		{
