@@ -196,7 +196,7 @@ package com.hlet
 		{
 			//trace("nstat-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
 			//trace("playVideo " + arg1.info.code);
-			trace("2Player ID:"+this.id+", event.info.level: " + arg1.info.level + "\n", "event.info.code: " + arg1.info.code);
+			trace("Player ID:"+this.id+", event.info.level: " + arg1.info.level + "\n", "event.info.code: " + arg1.info.code);
 //			if (this.iswait) 
 //			{
 //				return;
@@ -235,10 +235,10 @@ package com.hlet
 				case "NetStream.Play.StreamNotFound":
 				{
 					initConn();
-					this.ispaus = true;
-					this.ldinfo.visible = false;
-					this.msg.showMsg("connectError");
-					this.Play();
+//					this.ispaus = true;
+//					this.ldinfo.visible = false;
+//					this.msg.showMsg("connectError");
+//					this.Play();
 					trace("retry");
 					break;
 				}
@@ -490,9 +490,9 @@ package com.hlet
 		public function Play():void
 		{
 
-			this.serverIP = "";
-			this.serverPort = "";
-			this.serverId = -1;
+			//this.serverIP = "";
+			//this.serverPort = "";
+			//this.serverId = -1;
 			if (this.urlManager == null) 
 			{
 				this.playFLV(this.flvurl);
@@ -523,8 +523,8 @@ package com.hlet
 			{
 				this.urlManager.Stop();
 			}
-			this.serverId = -1;
-			this.serverPort = "";
+			//this.serverId = -1;
+			//this.serverPort = "";
 			this.videoStream.close();
 			this._duration = 0;
 			this.dbClickMC.Show();
@@ -641,8 +641,8 @@ package com.hlet
 			{
 				this.urlManager.Stop();
 			}
-			this.serverId = -1;
-			this.serverPort = "";
+			//this.serverId = -1;
+			//this.serverPort = "";
 			this.videoStream.close();
 			this.video.clear();
 			this.ispaus = false;
