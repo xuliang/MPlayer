@@ -121,6 +121,7 @@ package com.hlet
 			//flash.external.ExternalInterface.addCallback("setVol", this.fvol);
 			flash.external.ExternalInterface.addCallback("setFull", this.setFull);
 			flash.external.ExternalInterface.addCallback("startRTMP", this.startRTMP);
+			flash.external.ExternalInterface.addCallback("setStopTime", this.setStopTime);
 			////////////////////////////////////////////////////////////////////////////////////////
 			flash.external.ExternalInterface.addCallback("setLogoTxt", this.setLogoTxt);
 			flash.external.ExternalInterface.addCallback("startVod", this.startVod);
@@ -843,6 +844,14 @@ package com.hlet
 			RtmpManager.stopListen();
 			flash.external.ExternalInterface.call("onVideoMsg", "" + 0 + "", "stopListen");
 			return;
+		}
+		public function setStopTime(arg1:int):int
+		{
+			for(var i : int =0;i<this.vod.length;i++)
+			{
+				this.vod[i].stopTime=arg1;
+			}
+			return 0;
 		}
 		public function startRTMP(arg1:int,channel:String):int
 		{

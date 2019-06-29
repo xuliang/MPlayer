@@ -395,12 +395,13 @@ function startListen(devIdno, chn)
         getSWF('MPlayer').setFull();
     };
      function startRTMP() {
+     /*
           getSWF('MPlayer').stopVideo(0);
     getSWF('MPlayer').setVideoInfo(0, "title");
     getSWF('MPlayer').setBufferTime(0, 1);
     getSWF('MPlayer').setBufferTimeMax(0, 5);
      getSWF('MPlayer').startRTMP(0,"1080_2");
-     /*
+     */
      for(var i=0;i<10;i++)
      {
           getSWF('MPlayer').stopVideo(i);
@@ -409,7 +410,7 @@ function startListen(devIdno, chn)
     getSWF('MPlayer').setBufferTimeMax(i, 5);
      getSWF('MPlayer').startRTMP(i,"1080_2");
      }
-     */
+     
 }
 function resetVideo()
 {

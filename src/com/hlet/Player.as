@@ -7,6 +7,7 @@ package com.hlet
 	
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.AsyncErrorEvent;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -22,6 +23,8 @@ package com.hlet
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 	import flash.system.Security;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	
 	[SWF(backgroundColor="#000000")]
@@ -63,7 +66,11 @@ package com.hlet
 		public var isvol:Boolean;
 		private var bufferTime:Number;
 		private var bufferTimeMax:Number;
-		
+		public var stopTime:Number=1;//*60*1000;//默认值3分钟
+		private var stopNumber:Number=0;//临时计数器
+		private var stopDisplayNumber=0;//自动停止按钮倒计时显示计数
+		//private var stopTimer:flash.utils.Timer;//自动停止计时器
+		private var stopTimeButton:TextField = new TextField();
 		public function Player()
 		{
 			this.timer = new flash.utils.Timer(500);
@@ -118,6 +125,18 @@ package com.hlet
 			this.playbtn.addEventListener(PlayEvent.PLAY, this.onPlay);
 			addChild(this.playbtn);
 			addChild(this.CtrlPan);
+
+			this.stopTimeButton.text="点击这里继续观看\n      (10s将关闭)";
+			this.stopTimeButton.border=true;
+			this.stopTimeButton.background=true;
+			this.stopTimeButton.backgroundColor=0xBEBEBE;
+			this.stopTimeButton.selectable=false;
+			this.stopTimeButton.height=50;
+			this.stopTimeButton.width=150;
+			this.stopTimeButton.autoSize=flash.text.TextFieldAutoSize.CENTER ;
+			this.stopTimeButton.visible=false;
+			this.stopTimeButton.addEventListener(flash.events.MouseEvent.CLICK, this.stopTimeButtonClick);		
+			addChild(this.stopTimeButton);
 		}
 		public function onBWDone():void
 		{
@@ -277,7 +296,12 @@ package com.hlet
 			dispatchEvent(new PlayerEvent("pdoubleclick"));
 			return;
 		}
-		
+		private function stopTimeButtonClick(arg1:flash.events.MouseEvent):void
+		{
+			this.stopNumber=0;
+			this.stopTimeButton.visible=false;
+			this.stopDisplayNumber=0;
+		}
 		private function fclick(arg1:flash.events.MouseEvent):void
 		{
 			trace("fclick");
@@ -489,7 +513,9 @@ package com.hlet
 		
 		public function Play():void
 		{
-
+			
+			flash.external.ExternalInterface.call("playVideoByFlash", this.id );
+			
 			//this.serverIP = "";
 			//this.serverPort = "";
 			//this.serverId = -1;
@@ -507,7 +533,7 @@ package com.hlet
 			this.disvol()
 			this.dbClickMC.Hide();
 			this.playbtn.visible = false;
-			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "play");
+			//flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "play");
 			return;
 			
 		}
@@ -674,6 +700,26 @@ package com.hlet
 		
 		function onTimer(arg1:flash.events.Event):*
 		{
+			/////////////////////////////////////////////////////////
+			//自动停止计时器
+			this.stopNumber++;
+			if(stopNumber>this.stopTime*60*2)
+			{
+				this.stopTimeButton.x = this.Rect.rx+this.Rect.rw/2-this.stopTimeButton.width/2;
+				this.stopTimeButton.y = this.Rect.ry+this.Rect.rh/2-this.stopTimeButton.height/2;
+				this.stopTimeButton.visible=true;
+				this.stopDisplayNumber=this.stopDisplayNumber+0.5;
+				
+				this.stopTimeButton.text="点击这里继续观看\n      ("+int(10-this.stopDisplayNumber)+"s将关闭)";;
+				if(this.stopDisplayNumber==10)
+				{
+				this.stopNumber=0;
+				this.stopTimeButton.visible=false;
+				this.stopDisplayNumber=0;
+				this.Stop();
+				}
+			}
+			/////////////////////////////////////////////////////////
 			//trace("playbackBytesPerSecond:"+this.videoStream.info.playbackBytesPerSecond);
 			//trace("BufferLength:"+this.videoStream.bufferLength+"\tTime:"+this.videoStream.time+"\tcurrentFPS:"+this.videoStream.currentFPS);
 			//var loc1:*=this.videoStream.bytesLoaded;
