@@ -66,7 +66,7 @@ package com.hlet
 		public var isvol:Boolean;
 		private var bufferTime:Number;
 		private var bufferTimeMax:Number;
-		public var stopTime:Number=1;//*60*1000;//默认值3分钟
+		public var stopTime:Number=3;//*60*1000;//默认值3分钟
 		private var stopNumber:Number=0;//临时计数器
 		private var stopDisplayNumber=0;//自动停止按钮倒计时显示计数
 		//private var stopTimer:flash.utils.Timer;//自动停止计时器
