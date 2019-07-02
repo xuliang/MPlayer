@@ -853,8 +853,10 @@ package com.hlet
 			}
 			return 0;
 		}
-		public function startRTMP(arg1:int,channel:String):int
+		public function startRTMP(arg1:int,channel:String,streamType:String):int
 		{
+//			flash.external.ExternalInterface.call("getFlashError", this.vod.length );
+//			flash.external.ExternalInterface.call("getFlashError", this.vod[arg1]);
 			if (arg1 < 0) 
 			{
 				return 3;
@@ -882,9 +884,13 @@ package com.hlet
 				this.vod[arg1].addEventListener(PlayEvent.NORM, this.onNorm);
 				this.vod[arg1].setRect(this.rect[arg1]);
 			}
+//			flash.external.ExternalInterface.call("getFlashError", this.vod[arg1].id+"-1");
+			this.vod[arg1].serverIP=this.serverIP;
+			this.vod[arg1].serverPort=this.serverPort;
+			this.vod[arg1].serverApp=this.serverApp;
 			this.vod[arg1].param = "";
 			this.vod[arg1].flvstat = 2;
-			this.vod[arg1].playRTMP(channel);
+			this.vod[arg1].playRTMP(channel,streamType);
 			//this.vod[arg1].disvol();
 //			if (this.num == 1) 
 //			{

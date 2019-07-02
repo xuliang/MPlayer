@@ -64,6 +64,7 @@ package com.hlet
 		public var urlParm:UrlParm;		
 		public var urlManager:UrlManager;		
 		public var isvol:Boolean;
+		public var streamType:String="";
 		private var bufferTime:Number;
 		private var bufferTimeMax:Number;
 		public var stopTime:Number=3;//*60*1000;//默认值3分钟
@@ -145,18 +146,25 @@ package com.hlet
 		}
 		private function initConn():void
 		{
+//			flash.external.ExternalInterface.call("getFlashError",this.id+"-"+this.serverIP+"-"+this.serverPort+"-"+this.serverApp);
+			if(this.videoConnection==null)
+			{
 			this.videoConnection = new flash.net.NetConnection();
+			}
 			this.videoConnection.addEventListener(flash.events.SecurityErrorEvent.SECURITY_ERROR, this.securityErrorHandler);
 			this.videoConnection.addEventListener(flash.events.NetStatusEvent.NET_STATUS, this.netStatusHandler);
 			this.videoConnection.client=this;
-			this.videoConnection.connect("rtmp://"+this.serverIP+":"+this.serverPort+"/"+this.serverApp);
 			this.videoConnection.maxPeerConnections = 100;
-			
+			this.videoConnection.connect("rtmp://"+this.serverIP+":"+this.serverPort+"/"+this.serverApp);
 		}
-		public function playRTMP(arg1:String):void
+		public function playRTMP(channel:String,streamType:String):void
 		{
-			this.flvurl = arg1;
-			initConn();
+//			flash.external.ExternalInterface.call("getFlashError", this.id+"-2");
+//			flash.external.ExternalInterface.call("getFlashError",this.id+"-"+streamType+"-"+channel+"-"+this.serverIP+"-"+this.serverPort+"-"+this.serverApp);
+			this.streamType=streamType;
+			this.flvurl = channel;
+			this.Play();
+			//initConn();
 		}
 
 		function refreshBuffer(arg1:flash.events.Event):void
@@ -213,9 +221,10 @@ package com.hlet
 		
 		function netStatusHandler(arg1:flash.events.NetStatusEvent):void
 		{
+			
 			//trace("nstat-Width:"+this.video.width+",Height:"+this.video.height+",Video Width:"+this.video.videoWidth+",Video Height:"+this.video.videoHeight);
 			//trace("playVideo " + arg1.info.code);
-			trace("Player ID:"+this.id+", event.info.level: " + arg1.info.level + "\n", "event.info.code: " + arg1.info.code);
+			trace(new Date().toString()+"\t2Player ID:"+this.id+", event.info.level: " + arg1.info.level + "\n", "event.info.code: " + arg1.info.code);
 //			if (this.iswait) 
 //			{
 //				return;
@@ -224,6 +233,7 @@ package com.hlet
 			switch (loc1) 
 			{
 				case "NetConnection.Connect.Success":
+//					flash.external.ExternalInterface.call("getFlashError", this.id+"-3");
 					//doVideo(nc);
 					this.videoStream = new flash.net.NetStream(this.videoConnection);
 					this.videoStream.bufferTime = this.bufferTime;
@@ -236,7 +246,8 @@ package com.hlet
 					this.metaListener = new Object();
 					this.metaListener.onMetaData = this.onMetaData;
 					this.videoStream.client = this.metaListener;
-					this.Play();
+					//this.Play();
+					this.playFLV(this.flvurl);
 					break;
 				case "NetStream.Buffer.Empty":
 				{
@@ -249,11 +260,12 @@ package com.hlet
 					this.ldinfo.visible = false;
 					break;
 				}
-				case "NetConnection.Connect.Closed":
+				//case "NetConnection.Connect.Closed":
 				case "NetStream.Play.Failed":
 				case "NetStream.Play.StreamNotFound":
 				{
-					initConn();
+					this.Play();
+//					initConn();
 //					this.ispaus = true;
 //					this.ldinfo.visible = false;
 //					this.msg.showMsg("connectError");
@@ -513,26 +525,31 @@ package com.hlet
 		
 		public function Play():void
 		{
-			
-			flash.external.ExternalInterface.call("playVideoByFlash", this.id );
-			
+//			flash.external.ExternalInterface.call("getFlashError", this.id+"-4");
+			//调用外部js方法下发推流指令
+			flash.external.ExternalInterface.call("playVideoByFlash", this.id,this.streamType );
+//			flash.external.ExternalInterface.call("getFlashError", this.id+"-5");
+//		if(this.videoConnection.connected!=true)
+//		{
+	initConn();
+//		}
 			//this.serverIP = "";
 			//this.serverPort = "";
 			//this.serverId = -1;
-			if (this.urlManager == null) 
-			{
-				this.playFLV(this.flvurl);
-				this.timer.start();
-			}
-			else 
-			{
-				this.showLoading();
-				this.urlManager.getUrl1();
-				this.urlManager.retry = true;
-			}
-			this.disvol()
-			this.dbClickMC.Hide();
-			this.playbtn.visible = false;
+//			if (this.urlManager == null) 
+//			{
+//				this.playFLV(this.flvurl);
+//				this.timer.start();
+//			}
+//			else 
+//			{
+//				this.showLoading();
+//				this.urlManager.getUrl1();
+//				this.urlManager.retry = true;
+//			}
+//			this.disvol()
+//			this.dbClickMC.Hide();
+//			this.playbtn.visible = false;
 			//flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "play");
 			return;
 			
@@ -551,6 +568,7 @@ package com.hlet
 			}
 			//this.serverId = -1;
 			//this.serverPort = "";
+			this.videoConnection.close();
 			this.videoStream.close();
 			this._duration = 0;
 			this.dbClickMC.Show();
@@ -892,6 +910,7 @@ package com.hlet
 		
 		public function playFLV(arg1:String):void
 		{
+//			flash.external.ExternalInterface.call("getFlashError", this.id+"-6");
 			this.flvurl = arg1;
 			trace("playVideo " + arg1);
 			this._duration = 0;
@@ -918,6 +937,7 @@ package com.hlet
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "start");
 			this.playbtn.visible = false;
 			this.dbClickMC.Hide();
+			this.disvol()
 			return;
 		}
 		

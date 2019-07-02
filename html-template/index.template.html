@@ -400,7 +400,7 @@ function startListen(devIdno, chn)
     getSWF('MPlayer').setVideoInfo(0, "title");
     getSWF('MPlayer').setBufferTime(0, 1);
     getSWF('MPlayer').setBufferTimeMax(0, 5);
-     getSWF('MPlayer').startRTMP(0,"1080_2");
+     getSWF('MPlayer').startRTMP(0,"1080_2",0);
      */
      for(var i=0;i<10;i++)
      {
@@ -408,9 +408,13 @@ function startListen(devIdno, chn)
     getSWF('MPlayer').setVideoInfo(i, "title"+i);
     getSWF('MPlayer').setBufferTime(i, 1+i);
     getSWF('MPlayer').setBufferTimeMax(i, 5);
-     getSWF('MPlayer').startRTMP(i,"1080_2");
+     getSWF('MPlayer').startRTMP(i,"1080_2",i);
      }
      
+}
+function getFlashError(msg)
+{
+console.log(msg);
 }
 function resetVideo()
 {
