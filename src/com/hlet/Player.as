@@ -261,6 +261,7 @@ package com.hlet
 					break;
 				}
 				//case "NetConnection.Connect.Closed":
+				//case "NetStream.Video.DimensionChange":
 				case "NetStream.Play.Failed":
 				case "NetStream.Play.StreamNotFound":
 				{
@@ -486,10 +487,14 @@ package com.hlet
 			this.vol = 0;
 			var loc1:*=new flash.media.SoundTransform();
 			loc1.volume = this.vol;
+			if(this.isvol)
+			{
 			this.videoStream.soundTransform = loc1;
 			this.isvol = false;
 			this.CtrlPan.btnSound.silent();
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "silent");
+			}
+
 			return;
 		}
 		
@@ -880,7 +885,7 @@ package com.hlet
 		
 		function onSound(arg1:PlayEvent):void
 		{
-			this.ablevol();
+			//this.ablevol();
 			if (this.iswait) 
 			{
 				return;
