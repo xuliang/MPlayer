@@ -490,11 +490,12 @@ package com.hlet
 			if(this.isvol)
 			{
 			this.videoStream.soundTransform = loc1;
+			
+
+			}
 			this.isvol = false;
 			this.CtrlPan.btnSound.silent();
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "silent");
-			}
-
 			return;
 		}
 		
@@ -591,7 +592,8 @@ package com.hlet
 			this.ldinfo.visible = false;
 			this.msg.showMsg("");
 			this.msg.visible = false;
-			this.disvol();
+			//this.disvol();
+			this.isvol = true;
 			this.CtrlPan.btnSound.disable();
 			this.CtrlPan.btnPlay.onStop();
 			this.CtrlPan.btnPlay.enable();
