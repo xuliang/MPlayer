@@ -64,6 +64,7 @@ package com.hlet
 		public var urlParm:UrlParm;		
 		public var urlManager:UrlManager;		
 		public var isvol:Boolean;
+		public var isinit:Boolean;
 		public var streamType:String="";
 		private var bufferTime:Number;
 		private var bufferTimeMax:Number;
@@ -83,7 +84,7 @@ package com.hlet
 			addChild(this.video);
 			//initConn();
 			
-			
+			this.isinit=false;
 			this.isvol = true;
 			this.ispaus = true;
 			this.isfull = false;
@@ -487,14 +488,16 @@ package com.hlet
 			this.vol = 0;
 			var loc1:*=new flash.media.SoundTransform();
 			loc1.volume = this.vol;
+			if(this.isinit && this.videoStream!=null)
+			{
 			if(this.isvol)
 			{
 			this.videoStream.soundTransform = loc1;
-			
-
-			}
-			this.isvol = false;
 			this.CtrlPan.btnSound.silent();
+			this.isvol = false;
+			}
+			}
+
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "silent");
 			return;
 		}
@@ -538,6 +541,8 @@ package com.hlet
 //		if(this.videoConnection.connected!=true)
 //		{
 	initConn();
+	this.isinit=true;
+	this.isvol=true;
 //		}
 			//this.serverIP = "";
 			//this.serverPort = "";
@@ -593,7 +598,7 @@ package com.hlet
 			this.msg.showMsg("");
 			this.msg.visible = false;
 			//this.disvol();
-			this.isvol = true;
+			//this.isvol = false;
 			this.CtrlPan.btnSound.disable();
 			this.CtrlPan.btnPlay.onStop();
 			this.CtrlPan.btnPlay.enable();

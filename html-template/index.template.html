@@ -394,11 +394,12 @@ function startListen(devIdno, chn)
         function setServerInfo() {
         var obj = getSWF('MPlayer');
        // var str = obj.setServerInfo("192.168.4.6","1935","main");
-       var str = obj.setServerInfo("10.20.129.54","1935","111");
+       var str = obj.setServerInfo("10.20.129.54","1935","live/stream");
         alert(str);
     }
     
      function startRTMP() {
+     /*
          for(var i=0;i<6;i++)
      {
           getSWF('MPlayer').stopVideo(i);
@@ -407,17 +408,17 @@ function startListen(devIdno, chn)
     getSWF('MPlayer').setBufferTimeMax(i, 5);
      getSWF('MPlayer').startRTMP(i,"1080_2",i);
      }
-      /*
-     for(var i=0;i<6;i++)
+      */
+     for(var i=0;i<10;i++)
      {
           getSWF('MPlayer').stopVideo(i);
     getSWF('MPlayer').setVideoInfo(i, "title"+i);
     getSWF('MPlayer').setBufferTime(i, 1+i);
     getSWF('MPlayer').setBufferTimeMax(i, 5);
     var temp=i+1;
-     getSWF('MPlayer').startRTMP(i,"10000000001_"+temp,i);
+     getSWF('MPlayer').startRTMP(i,"018600000004_"+temp,i);
      }
-     */
+     
 }
 function getFlashError(msg)
 {
