@@ -579,6 +579,10 @@ package com.hlet
 			}
 			//this.serverId = -1;
 			//this.serverPort = "";
+			
+			this.stopNumber=0;
+			this.stopDisplayNumber=0;
+			
 			this.videoConnection.close();
 			this.videoStream.close();
 			this._duration = 0;
