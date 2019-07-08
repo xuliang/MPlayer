@@ -604,7 +604,8 @@ package com.hlet
 			this.CtrlPan.btnPlay.enable();
 			this.CtrlPan.btnCap.disable();
 			//this.CtrlPan.btncamer.disable();
-			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "stop");
+			//flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "stop");
+			flash.external.ExternalInterface.call("stopVideoByFlash", this.id,this.streamType );
 			return;
 		}
 		
