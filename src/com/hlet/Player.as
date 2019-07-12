@@ -26,6 +26,9 @@ package com.hlet
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.utils.Timer;
+	import mx.events.SliderEvent;
+	
+	import fl.controls.Slider;
 	
 	[SWF(backgroundColor="#000000")]
 	public class Player extends flash.display.MovieClip
@@ -37,8 +40,7 @@ package com.hlet
 		public var flvurl:String="";		
 		public var Rect:RECT;		
 		public var _duration:Number;		
-		public var vol:Number;		
-		public var vol1:Number;		
+
 		public var ispaus:Boolean;		
 		public var isfull:Boolean;		
 		public var iswait:Boolean;		
@@ -73,6 +75,14 @@ package com.hlet
 		private var stopDisplayNumber=0;//自动停止按钮倒计时显示计数
 		//private var stopTimer:flash.utils.Timer;//自动停止计时器
 		private var stopTimeButton:TextField = new TextField();
+		//定义滑块实例名称
+		//private var slider:HSlider;
+		public var slider:Slider;
+		
+		//public var vol:Number;		
+		//public var vol1:Number;		
+		private var volValue:Number=0.5;//音量值0-1表示，默认为0.5
+		//private var volValue1:Number=0.5;//音量当前值
 		public function Player()
 		{
 			this.timer = new flash.utils.Timer(500);
@@ -90,8 +100,8 @@ package com.hlet
 			this.isfull = false;
 			this.iswait = true;
 			var loc1:*;
-			this.vol = loc1 = 1;
-			this.vol1 = loc1;
+			//this.vol = loc1 = 0.5;
+			//this.vol1 = loc1;
 			this.flvstat = 0;
 			this._duration = 0;
 			this.ldinfo = new Loading();
@@ -139,6 +149,54 @@ package com.hlet
 			this.stopTimeButton.visible=false;
 			this.stopTimeButton.addEventListener(flash.events.MouseEvent.CLICK, this.stopTimeButtonClick);		
 			addChild(this.stopTimeButton);
+			
+			
+			//创建滑块对象实例
+			//slider=new HSlider();
+			slider=new Slider();
+			this.slider.enabled=false;
+			this.slider.visible=false;
+			/*
+			slider.maximum=100;//最大值 
+			slider.minimum=0;//最小值 
+			slider.snapInterval=10;//一次拖动变化的数值 
+			slider.tickInterval=10;//把拖动条分成一格一格的，一格的刻度是多少 
+			minimum="0" 
+			maximum="1" 
+			value="1" 
+			stepSize="0.1"
+			snapInterval="0.1" 
+			liveDragging="true" 
+			change="fxImage.alpha=hSlider.value;
+*/
+			//移动滑块位置
+			slider.move(50,100)
+			slider.maximum=1;//最大值 
+			slider.minimum=0;//最小值 
+			slider.snapInterval=0.01;//一次拖动变化的数值 
+			slider.liveDragging="true" 
+			//设置滑块初始值
+			slider.value=0.5;
+			//在滑块对象商注册改变事件
+			slider.addEventListener(Event.CHANGE,changeVolue);
+			slider.addEventListener(SliderEvent.THUMB_RELEASE,thumbRelease);
+			//加入舞台
+			addChild(slider)
+		}
+		//创建转换声音事件处理函数
+		private function changeVolue(evt:Event):void{
+			//创建转换对象
+			var trans:SoundTransform=new SoundTransform();
+			//获取声音的值，并加入转换对象
+			this.volValue=evt.target.value;
+			trans.volume=this.volValue;
+
+			//实现转换
+			this.videoStream.soundTransform=trans;
+		}
+		//创建转换声音事件处理函数
+		private function thumbRelease(evt:Event):void{
+		this.slider.visible=false;
 		}
 		public function onBWDone():void
 		{
@@ -406,6 +464,10 @@ package com.hlet
 				this.dbClickMC.isFull = false;
 				this.dbClickMC.reSize();
 			}
+			trace(this.id+"-"+this.Rect.rx+"-"+this.Rect.ry);
+			this.slider.move(this.Rect.rx+this.Rect.rw-90,this.Rect.ry+this.Rect.rh-43);
+			//this.stopTimeButton.x = this.Rect.rx+this.Rect.rw/2-this.stopTimeButton.width/2;
+			//this.stopTimeButton.y = this.Rect.ry+this.Rect.rh/2-this.stopTimeButton.height/2;
 			return;
 		}
 		
@@ -475,19 +537,21 @@ package com.hlet
 		
 		public function setVolume(arg1:Number):void
 		{
-			this.vol = arg1;
+			this.volValue = arg1;
 			var loc1:*=new flash.media.SoundTransform();
-			loc1.volume = this.vol;
+			loc1.volume = this.volValue;
 			this.videoStream.soundTransform = loc1;
 			return;
 		}
 		
 		public function disvol():void
 		{
-			this.vol1 = this.vol;
-			this.vol = 0;
+			this.slider.enabled=false;
+			this.slider.visible=false;
+			//this.vol1 = this.vol;
+			//this.vol = 0;
 			var loc1:*=new flash.media.SoundTransform();
-			loc1.volume = this.vol;
+			loc1.volume =0;
 			if(this.isinit && this.videoStream!=null)
 			{
 			if(this.isvol)
@@ -504,11 +568,12 @@ package com.hlet
 		
 		public function ablevol():void
 		{
-			var loc2:*;
-			this.vol1 = loc2 = 1;
-			this.vol = loc2;
+			this.slider.enabled=true;
+			//var loc2:*;
+			//this.vol1 = loc2 = 1;
+			//this.vol = loc2;
 			var loc1:*=new flash.media.SoundTransform();
-			loc1.volume = this.vol;
+			loc1.volume = this.volValue;
 			this.videoStream.soundTransform = loc1;
 			this.isvol = true;
 			this.CtrlPan.btnSound.sound();
@@ -610,6 +675,8 @@ package com.hlet
 			//this.CtrlPan.btncamer.disable();
 			//flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "stop");
 			//flash.external.ExternalInterface.call("stopVideoByFlash", this.id,this.streamType );
+
+			
 			return;
 		}
 		
@@ -710,8 +777,8 @@ package com.hlet
 			this.isfull = false;
 			this.iswait = true;
 			var loc1:*;
-			this.vol = loc1 = 1;
-			this.vol1 = loc1;
+			this.volValue =0.5;
+			//this.vol1 = loc1;
 			this.flvstat = 0;
 			this._duration = 0;
 			this.playbtn.visible = false;

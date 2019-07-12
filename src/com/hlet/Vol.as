@@ -1,23 +1,36 @@
 package com.hlet
 {
-	import flash.display.*;
-	import flash.events.*;
-	import flash.geom.*;
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 	
 	public class Vol extends flash.display.MovieClip
 	{
+		public var volMc:flash.display.MovieClip=new MovieClip();
+		public var volbtn:flash.display.MovieClip=new MovieClip();
+		var rect:flash.geom.Rectangle;
+		var v:Number;
+		var sx:Number;
+		var oldx:Number;
+		var w:Number;
+		var isDrag:Boolean;
+		
 		public function Vol()
 		{
 			super();
 			this.isDrag = false;
 			this.sx = this.volbtn.x;
-			this.volMc.visible = false;
+			//this.volMc.visible = false;
 			this.w = 86;
-			this.rect = new flash.geom.Rectangle(this.volbtn.x, (this.volbtn.y - 1), this.w, 0);
+			this.rect = new flash.geom.Rectangle(this.volbtn.x, (this.volbtn.y - 1), this.w, 150);
 			this.buttonMode = true;
 			this.addEventListener(flash.events.MouseEvent.CLICK, this.changeVol);
 			this.volbtn.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.dragSrart);
 			this.volbtn.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.dragEnd);
+			
+			addChild(volMc);
+			addChild(volbtn);
 			return;
 		}
 		
@@ -102,21 +115,6 @@ package com.hlet
 			Object(parent).sendVol();
 			return;
 		}
-		
-		public var volMc:flash.display.MovieClip;
-		
-		public var volbtn:flash.display.MovieClip;
-		
-		var rect:flash.geom.Rectangle;
-		
-		var v:Number;
-		
-		var sx:Number;
-		
-		var oldx:Number;
-		
-		var w:Number;
-		
-		var isDrag:Boolean;
+
 	}
 }

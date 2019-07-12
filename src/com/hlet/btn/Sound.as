@@ -86,12 +86,16 @@ package com.hlet.btn
 		function msover(arg1:flash.events.MouseEvent):void
 		{
 //			this.tip.visible = true;
+			if(innerBtn1.visible)
+			Object(parent.parent).slider.visible=true;
+			//trace(Object(parent));
 			return;
 		}
 		
 		function msout(arg1:flash.events.MouseEvent):void
 		{
 //			this.tip.visible = false;
+			//Object(parent.parent).slider.visible=false;
 			return;
 		}
 		
