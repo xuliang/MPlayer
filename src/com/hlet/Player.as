@@ -464,10 +464,9 @@ package com.hlet
 				this.dbClickMC.isFull = false;
 				this.dbClickMC.reSize();
 			}
-			trace(this.id+"-"+this.Rect.rx+"-"+this.Rect.ry);
+
 			this.slider.move(this.Rect.rx+this.Rect.rw-90,this.Rect.ry+this.Rect.rh-43);
-			//this.stopTimeButton.x = this.Rect.rx+this.Rect.rw/2-this.stopTimeButton.width/2;
-			//this.stopTimeButton.y = this.Rect.ry+this.Rect.rh/2-this.stopTimeButton.height/2;
+
 			return;
 		}
 		
@@ -1090,6 +1089,7 @@ package com.hlet
 			this.dbClickMC.isFull = true;
 			this.dbClickMC.reSize();
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "full");
+			this.slider.move(this.Rect.sw-90,this.Rect.sh-43);
 			return;
 		}
 	}
