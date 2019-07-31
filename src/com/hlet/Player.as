@@ -646,7 +646,7 @@ package com.hlet
 			
 			this.stopNumber=0;
 			this.stopDisplayNumber=0;
-			
+			this.slider.visible=false;
 			this.videoConnection.close();
 			this.videoStream.close();
 			this._duration = 0;
