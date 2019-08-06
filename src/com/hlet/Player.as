@@ -77,8 +77,8 @@ package com.hlet
 		private var stopTimeButton:TextField = new TextField();
 		//定义滑块实例名称
 		//private var slider:HSlider;
-		public var slider:Slider;
-		
+		public var slider:Slider;//音量滑块
+		public var sliderbg:Sprite;//音量滑块背景
 		//public var vol:Number;		
 		//public var vol1:Number;		
 		private var volValue:Number=0.5;//音量值0-1表示，默认为0.5
@@ -151,38 +151,49 @@ package com.hlet
 			addChild(this.stopTimeButton);
 			
 			
-			//创建滑块对象实例
+			//创建滑块背景对象实例
+			this.sliderbg=new Sprite();
+			this.sliderbg.alpha=0.8;
+			this.sliderbg.graphics.beginFill(0x000000); 
+			this.sliderbg.graphics.drawRect(0,0,110,30);
+			this.sliderbg.graphics.endFill();
+
 			//slider=new HSlider();
 			slider=new Slider();
 			this.slider.enabled=false;
-			this.slider.visible=false;
-			/*
-			slider.maximum=100;//最大值 
-			slider.minimum=0;//最小值 
-			slider.snapInterval=10;//一次拖动变化的数值 
-			slider.tickInterval=10;//把拖动条分成一格一格的，一格的刻度是多少 
-			minimum="0" 
-			maximum="1" 
-			value="1" 
-			stepSize="0.1"
-			snapInterval="0.1" 
-			liveDragging="true" 
-			change="fxImage.alpha=hSlider.value;
-*/
+			this.sliderbg.visible=false;
+
 			//移动滑块位置
-			slider.move(50,100)
-			slider.maximum=1;//最大值 
-			slider.minimum=0;//最小值 
-			slider.snapInterval=0.01;//一次拖动变化的数值 
-			slider.liveDragging="true" 
+			this.slider.move(15,10);
+			this.slider.maximum=1;//最大值 
+			this.slider.minimum=0;//最小值 
+			this.slider.snapInterval=0.01;//一次拖动变化的数值 
+			this.slider.liveDragging="true" ;
 			//设置滑块初始值
-			slider.value=0.5;
+			this.slider.value=0.5;
 			//在滑块对象商注册改变事件
-			slider.addEventListener(Event.CHANGE,changeVolue);
-			slider.addEventListener(SliderEvent.THUMB_RELEASE,thumbRelease);
+			this.slider.addEventListener(Event.CHANGE,changeVolue);
+			this.slider.addEventListener(SliderEvent.THUMB_RELEASE,thumbRelease);
+			//this.sliderbg.mouseChildren=false;
+			//this.sliderbg.addEventListener(Event.MOUSE_LEAVE,mouse_leave);
+			//this.sliderbg.addEventListener(flash.events.MouseEvent.MOUSE_OUT,mouse_leave);
+			//this.sliderbg.addEventListener(flash.events.MouseEvent.MOUSE_MOVE,mouse_move);
 			//加入舞台
-			addChild(slider)
+			this.sliderbg.addChild(slider);
+			addChild(this.sliderbg);
 		}
+		private function mouse_move(evt:MouseEvent):void{
+			
+			trace(evt.localX+","+evt.localY+","+evt.stageX+","+evt.stageY);
+			if(evt.localX<=1||evt.localY<=1||evt.localX>=109||evt.localY>=29)
+			{
+				this.sliderbg.visible=false;
+			}
+		}
+		private function mouse_leave(evt:Event):void{
+			//this.sliderbg.visible=false;
+		}
+		
 		//创建转换声音事件处理函数
 		private function changeVolue(evt:Event):void{
 			//创建转换对象
@@ -193,10 +204,12 @@ package com.hlet
 
 			//实现转换
 			this.videoStream.soundTransform=trans;
+			//this.sliderbg.removeEventListener(flash.events.MouseEvent.MOUSE_OUT,mouse_leave);
 		}
 		//创建转换声音事件处理函数
 		private function thumbRelease(evt:Event):void{
-		this.slider.visible=false;
+			this.sliderbg.visible=false;
+			//this.sliderbg.addEventListener(flash.events.MouseEvent.MOUSE_OUT,mouse_leave);
 		}
 		public function onBWDone():void
 		{
@@ -465,7 +478,11 @@ package com.hlet
 				this.dbClickMC.reSize();
 			}
 
-			this.slider.move(this.Rect.rx+this.Rect.rw-90,this.Rect.ry+this.Rect.rh-43);
+			//this.slider.move(this.Rect.rx+this.Rect.rw-90,this.Rect.ry+this.Rect.rh-43);
+			//this.sliderbg.graphics.moveTo(this.Rect.rx+this.Rect.rw-115,this.Rect.ry+this.Rect.rh-65);
+			
+			this.sliderbg.x=this.Rect.rx+this.Rect.rw-115;
+			this.sliderbg.y=this.Rect.ry+this.Rect.rh-65;
 
 			return;
 		}
@@ -494,6 +511,8 @@ package com.hlet
 			this.playbtn.reSize();
 			this.dbClickMC.setRect(this.Rect);
 			this.dbClickMC.reSize();
+			this.sliderbg.x=this.Rect.rx+this.Rect.rw-115;
+			this.sliderbg.y=this.Rect.ry+this.Rect.rh-65;
 			return;
 		}
 		
@@ -540,13 +559,17 @@ package com.hlet
 			var loc1:*=new flash.media.SoundTransform();
 			loc1.volume = this.volValue;
 			this.videoStream.soundTransform = loc1;
+
 			return;
+		
+			
+			
 		}
 		
 		public function disvol():void
 		{
 			this.slider.enabled=false;
-			this.slider.visible=false;
+			this.sliderbg.visible=false;
 			//this.vol1 = this.vol;
 			//this.vol = 0;
 			var loc1:*=new flash.media.SoundTransform();
@@ -646,7 +669,7 @@ package com.hlet
 			
 			this.stopNumber=0;
 			this.stopDisplayNumber=0;
-			this.slider.visible=false;
+			this.sliderbg.visible=false;
 			this.videoConnection.close();
 			this.videoStream.close();
 			this._duration = 0;
@@ -1089,7 +1112,9 @@ package com.hlet
 			this.dbClickMC.isFull = true;
 			this.dbClickMC.reSize();
 			flash.external.ExternalInterface.call("onVideoMsg", "" + this.id + "", "full");
-			this.slider.move(this.Rect.sw-90,this.Rect.sh-43);
+			//this.slider.move(this.Rect.sw-90,this.Rect.sh-43);
+			this.sliderbg.x=this.Rect.sw-115;
+			this.sliderbg.y=this.Rect.sh-65;
 			return;
 		}
 	}

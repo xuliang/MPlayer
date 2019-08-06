@@ -437,6 +437,10 @@ function resetVideo()
 getSWF('MPlayer').stopVideo(0);
 getSWF('MPlayer').reSetVideo(0);
 }
+function setVol(value)
+{
+getSWF('MPlayer').setVol(value);
+}
 function startRTMP111111111() {
      getSWF('MPlayer').stopVideo(0);
     getSWF('MPlayer').setVideoInfo(0, "title");
@@ -538,5 +542,8 @@ function startRTMP111111111() {
 <input type="button" onclick="setHue()" value="色相值"/>
 <input type="button" onclick="resetColor()" value="重置色彩"/>
 <input type="button" onclick="resetVideo()" value="清除1"/>
+<input type="button" onclick="setVol(0)" value="音量0"/>
+<input type="button" onclick="setVol(0.5)" value="音量0.5"/>
+<input type="button" onclick="setVol(1)" value="音量1"/>
    </body>
 </html>

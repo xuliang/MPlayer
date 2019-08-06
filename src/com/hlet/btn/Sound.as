@@ -87,7 +87,7 @@ package com.hlet.btn
 		{
 //			this.tip.visible = true;
 			if(innerBtn1.visible)
-			Object(parent.parent).slider.visible=true;
+			Object(parent.parent).sliderbg.visible=true;
 			//trace(Object(parent));
 			return;
 		}

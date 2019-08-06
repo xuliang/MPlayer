@@ -118,7 +118,7 @@ package com.hlet
 			flash.external.ExternalInterface.addCallback("setSaturation", this.setSaturation);//设置饱和度值，值的大小是 -255--255   1为中间值，0为灰度值（即黑白相片）
 			flash.external.ExternalInterface.addCallback("setHue", this.setHue);//设置色相值，值的大小是 -255--255  0为中间值
 			flash.external.ExternalInterface.addCallback("resetColor", this.resetColor);//重置色彩
-			//flash.external.ExternalInterface.addCallback("setVol", this.fvol);
+			flash.external.ExternalInterface.addCallback("setVol", this.setVolume);//设置音量
 			flash.external.ExternalInterface.addCallback("setFull", this.setFull);
 			flash.external.ExternalInterface.addCallback("startRTMP", this.startRTMP);
 			flash.external.ExternalInterface.addCallback("setStopTime", this.setStopTime);
@@ -168,6 +168,14 @@ package com.hlet
 			return;
 		}
 		
+		public function setVolume(value:Number):void
+		{
+			if (this.currVod == null) 
+			{
+				return;
+			}
+			this.currVod.setVolume(value);
+		}
 		public function setBrightness(value:Number):void
 		{
 			//**调整亮度**//
@@ -892,12 +900,12 @@ package com.hlet
 			this.vod[arg1].flvstat = 2;
 			this.vod[arg1].playRTMP(channel,streamType);
 			//this.vod[arg1].disvol();
-//			if (this.num == 1) 
-//			{
+			if (this.num == 1) 
+		{
 //				this.vod[arg1].ablevol();
-//				this.currVod = this.vod[arg1];
+				this.currVod = this.vod[arg1];
 //				//this.tools.setVod(this.currVod);
-//			}
+			}
 			this.addEventListener(flash.events.Event.ENTER_FRAME, this.refreshTime);
 
 			return 0;
