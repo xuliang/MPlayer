@@ -407,11 +407,11 @@ function startListen(devIdno, chn)
      getSWF('MPlayer').startRTMP(0,"1080",0);
      */
      
-         for(var i=0;i<6;i++)
+         for(var i=0;i<2;i++)
      {
           getSWF('MPlayer').stopVideo(i);
     getSWF('MPlayer').setVideoInfo(i, "title"+i);
-    getSWF('MPlayer').setBufferTime(i, 1+i);
+    getSWF('MPlayer').setBufferTime(i, 1);
     getSWF('MPlayer').setBufferTimeMax(i, 5);
      getSWF('MPlayer').startRTMP(i,"1080",i);
      }
@@ -434,8 +434,11 @@ console.log(msg);
 }
 function resetVideo()
 {
-getSWF('MPlayer').stopVideo(0);
-getSWF('MPlayer').reSetVideo(0);
+     for(var i=0;i<26;i++)
+     {
+getSWF('MPlayer').stopVideo(i);
+getSWF('MPlayer').reSetVideo(i);
+}
 }
 function setVol(value)
 {
