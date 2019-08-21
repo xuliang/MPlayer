@@ -1073,11 +1073,11 @@ package com.hlet
 					this.video.y =0;//this.video.height / 2 - 15 ;//(400 - this.video.height) / 2 - 15;
 				}
 				else 
-				{//这里可能会有个Bug。当窗口宽度小于高度时
+				{
 					this.video.width = this.Rect.sw;
 					this.video.height = loc3 * this.video.width / loc2;
-					this.video.x =this.video.width / 2;// (550 - this.video.width) / 2;
-					this.video.y =this.video.height / 2 - 15 ;//(400 - this.video.height) / 2 - 15;
+					this.video.x =0;//this.video.width / 2;// (550 - this.video.width) / 2;
+					this.video.y =(this.Rect.sh - 30-this.video.height)/2;//this.video.height / 2 - 15 ;//(400 - this.video.height) / 2 - 15;
 				}
 			}
 			else 
