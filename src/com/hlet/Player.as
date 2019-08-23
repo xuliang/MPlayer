@@ -30,7 +30,7 @@ package com.hlet
 	
 	import fl.controls.Slider;
 	
-	[SWF(backgroundColor="#000000")]
+	//[SWF(backgroundColor="#000000")]
 	public class Player extends flash.display.MovieClip
 	{		
 		public var videoConnection:flash.net.NetConnection;		

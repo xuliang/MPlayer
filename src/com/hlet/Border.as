@@ -13,7 +13,7 @@ package com.hlet
 		public static const waitfull:int=5;		
 		public static const began:int=6;		
 		public static const beganfull:int=7;		
-		public static const colArr:Array=[0, 65280, 255, 255, 255];		
+		public static const colArr:Array=[0x5E5E5E, 0x00FF00, 255, 255, 255];		//65280
 		var color:*=65280;		
 		var rect:RECT;		
 		var ld:*;
@@ -63,7 +63,8 @@ package com.hlet
 				case full:
 				{
 					graphics.beginFill(colArr[0]);
-					graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					//graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					graphics.drawRect(0, 0, this.rect.sw, this.rect.sh);
 					break;
 				}
 				case wait:
@@ -83,7 +84,8 @@ package com.hlet
 				case waitfull:
 				{
 					graphics.beginFill(colArr[0]);
-					graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					//graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					graphics.drawRect(0, 0, this.rect.sw, this.rect.sh);
 					break;
 				}
 			}
@@ -120,7 +122,8 @@ package com.hlet
 				case full:
 				{
 					graphics.beginFill(colArr[0]);
-					graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					//graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					graphics.drawRect(0, 0, this.rect.sw, this.rect.sh);
 					trace(2);
 					break;
 				}
@@ -150,7 +153,8 @@ package com.hlet
 				case beganfull:
 				{
 					graphics.beginFill(colArr[0]);
-					graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					//graphics.drawRect(275 - this.rect.sw / 2, 200 - this.rect.sh / 2, this.rect.sw, this.rect.sh);
+					graphics.drawRect(0, 0, this.rect.sw, this.rect.sh);
 					this.ld.visible = false;
 					break;
 				}

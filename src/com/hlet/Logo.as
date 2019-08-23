@@ -45,6 +45,8 @@ package com.hlet
 //				this.y = (-(this.Rect.sh - 400)) / 2;
 				this.x = 1;
 				this.y = 1;
+				this.width=this.Rect.sw;
+				this.height=this.Rect.sh;
 			}
 			else 
 			{

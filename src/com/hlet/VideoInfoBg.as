@@ -23,7 +23,7 @@ package com.hlet
 			return;
 		}
 		
-		var color:*=0;
+		var color:*=666666;
 		
 		var alp:*=1;
 	}
