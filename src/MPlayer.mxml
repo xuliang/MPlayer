@@ -7,6 +7,7 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			//不用反编译我哟，源代码在这里https://github.com/xuliang/MPlayer
 			import com.hlet.Main;
 			public function init() : void {
 				// 给自定义窗口中的文本框赋值

@@ -25,7 +25,7 @@ package com.hlet
 	import flash.utils.Timer;
 	
 	import fl.motion.ColorMatrix;
-	
+	//不用反编译我哟，源代码在这里https://github.com/xuliang/MPlayer
 	public class Main extends flash.display.MovieClip
 	{
 		//public var tools:Tools;		
@@ -204,8 +204,9 @@ package com.hlet
 			bh_Matrix.SetSaturationMatrix(value);  //设置饱和度值，值的大小是 -255--255   1为中间值，0为灰度值（即黑白相片）。
 			bh_Filter.matrix = bh_Matrix.GetFlatArray();
 			this.filters = [bh_Filter];
-			//bh_MC.filters = [];//去除滤镜
+			//bh_MC.filters = [];//去除滤镜 
 		}
+		
 		public function setHue(value:Number):void
 		{
 			var sx_Matrix:ColorMatrix=new ColorMatrix();
@@ -213,7 +214,7 @@ package com.hlet
 			sx_Matrix.SetHueMatrix(value);  //设置色相值，值的大小是 -255--255  0为中间值，向右向左一试便知。
 			sx_Filter.matrix = sx_Matrix.GetFlatArray();
 			this.filters = [sx_Filter];
-			//sx_MC.filters = [];//去除滤镜
+			//sx_MC.filters = [];//去除滤镜 
 		}
 		public function resetColor():void
 		{

@@ -86,7 +86,7 @@ package com.hlet
 		public function reSet():*
 		{
 			this.info = "";
-			this.infoBar.BackGround.setColor("0xFF0000");
+			this.infoBar.BackGround.setColor("000000");
 			return;
 		}
 		

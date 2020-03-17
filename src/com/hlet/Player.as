@@ -137,7 +137,8 @@ package com.hlet
 			this.playbtn.addEventListener(PlayEvent.PLAY, this.onPlay);
 			addChild(this.playbtn);
 			addChild(this.CtrlPan);
-
+			
+			//自动停止按钮初始化
 			this.stopTimeButton.text="点击这里继续观看\n      (10s将关闭)";
 			this.stopTimeButton.border=true;
 			this.stopTimeButton.background=true;
@@ -149,7 +150,7 @@ package com.hlet
 			this.stopTimeButton.visible=false;
 			this.stopTimeButton.addEventListener(flash.events.MouseEvent.CLICK, this.stopTimeButtonClick);		
 			addChild(this.stopTimeButton);
-			
+			 
 			
 			//创建滑块背景对象实例
 			this.sliderbg=new Sprite();

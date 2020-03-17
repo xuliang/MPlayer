@@ -4,6 +4,9 @@ package com.hlet
 	
 	public class VideoInfoBg extends flash.display.Sprite
 	{
+		var color:*="000000";
+		var alp:*=1;
+		
 		public function VideoInfoBg()
 		{
 			super();
@@ -15,7 +18,7 @@ package com.hlet
 		
 		public function setColor(arg1:String, arg2:Number=1):void
 		{
-			this.color = "0x" + arg1;
+			this.color ="0x" + arg1;
 			this.graphics.clear();
 			this.graphics.beginFill(this.color, arg2);
 			this.graphics.drawRect(0, 0, 200, 30);
@@ -23,8 +26,6 @@ package com.hlet
 			return;
 		}
 		
-		var color:*=666666;
-		
-		var alp:*=1;
+
 	}
 }
