@@ -857,15 +857,16 @@ package com.hlet
 		
 		public function setBufferTime(arg1:Number):void
 		{
-			//this.videoStream.bufferTime = arg1;
-			this.bufferTime = arg1;
+			this.bufferTime = arg1;			
+			this.videoStream.bufferTime = this.bufferTime;
+
 		}
 		
 		public function setBufferTimeMax(arg1:Number):void
 		{
-			//this.videoStream.bufferTimeMax = arg1;
 			this.bufferTimeMax = arg1;
-			return;
+			this.videoStream.bufferTimeMax = this.bufferTimeMax;
+
 		}
 		
 		function onPlay(arg1:PlayEvent):void
